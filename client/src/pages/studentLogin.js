@@ -14,15 +14,15 @@ const StudentLogin = () => {
             },
             body: JSON.stringify({ email, password})
         });
-        const json = await response.json();
-        console.log(json);
-         if  (!json.success) {
+        const data = await response.json();
+        console.log(data);
+         if  (data.user) {
             //save the auth token and redirect
             alert('Login Successful')
-          window.location.href='/dashboard'
+          window.location.href='/courseHomePage'
         }
         else{
-            alert('Login Failed')
+            alert('Login Fail')
         }
     }
   return (
