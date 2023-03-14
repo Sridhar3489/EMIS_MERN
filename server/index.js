@@ -8,6 +8,8 @@ const mongoose=require('mongoose')
 
 const User=require('./models/user.model')
 
+const Stud=require('./models/student.model')
+
 const jwt=require('jsonwebtoken')
 
 app.use(cors())
@@ -25,6 +27,7 @@ app.post('/api/register',async(req,res)=>{
             name:req.body.name,
             email:req.body.email,
             password:req.body.password,
+            role:req.body.role
         })
         res.json({status:'ok'})
     }catch(err){
@@ -49,6 +52,41 @@ app.post('/api/login',async(req,res)=>{
    else{
     return res.json({status:'error',user:false})
    }
+    
+})
+
+app.post('/api/studentlogin',async(req,res)=>{
+    const user=await Stud.findOne({
+     email:req.body.email,
+     password:req.body.password
+    }
+    )
+    if(user){
+     const token=jwt.sign({
+         name:user.name,
+         email:user.email
+     },'secret13')
+     return res.json({status:'ok',user:true})
+    }
+    else{
+     return res.json({status:'error',user:false})
+    }
+})
+
+app.post('/api/addstudent',async(req,res)=>{
+    console.log(req.body)
+    try{
+        await Stud.create({
+            name:req.body.name,
+            email:req.body.email,
+            password:req.body.password,
+            school:req.body.school,
+            clas:req.body.clas
+        })
+        res.json({status:'ok'})
+    }catch(err){
+        console.log(err)
+    }
     
 })
 
