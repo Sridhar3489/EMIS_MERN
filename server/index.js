@@ -10,6 +10,10 @@ const User=require('./models/user.model')
 
 const Stud=require('./models/student.model')
 
+const Faculty=require('./models/faculty.model')
+
+const Course=require('./models/course.model')
+
 const jwt=require('jsonwebtoken')
 
 app.use(cors())
@@ -69,15 +73,67 @@ app.post('/api/studentlogin',async(req,res)=>{
     }
 })
 
-app.post('/api/addstudent',async(req,res)=>{
+
+
+app.post('/api/studentregister',async(req,res)=>{
     console.log(req.body)
     try{
         await Stud.create({
             name:req.body.name,
             email:req.body.email,
             password:req.body.password,
+            study:req.body.study,
             school:req.body.school,
-            clas:req.body.clas
+            aggr:req.body.aggr
+        })
+        res.json({status:'ok'})
+    }catch(err){
+        console.log(err)
+    }
+    
+})
+
+app.post('/api/facultyregister',async(req,res)=>{
+    console.log(req.body)
+    try{
+        await Faculty.create({
+            name:req.body.name,
+            email:req.body.email,
+            password:req.body.password,
+            subject:req.body.subject
+        })
+        res.json({status:'ok'})
+    }catch(err){
+        console.log(err)
+    }
+    
+})
+
+app.post('/api/facultyloginforcourse',async(req,res)=>{
+    const user=await Faculty.findOne({
+     email:req.body.email,
+     password:req.body.password
+    }
+    )
+    if(user){
+     const token=jwt.sign({
+         name:user.name,
+         email:user.email
+     },'secret13')
+     return res.json({status:'ok',user:true})
+    }
+    else{
+     return res.json({status:'error',user:false})
+    }
+})
+
+app.post('/api/addcourse',async(req,res)=>{
+    console.log(req.body)
+    try{
+        await Course.create({
+            title:req.body.title,
+            author:req.body.author
+            
         })
         res.json({status:'ok'})
     }catch(err){

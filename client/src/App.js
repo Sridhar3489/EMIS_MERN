@@ -5,8 +5,13 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import HomePage from './pages/HomePage';
-import AddStudent from './pages/addStudent'
 import StudentLogin from './pages/studentLogin';
+import CoursePage from './pages/coursePage';
+import StudentRegister from './pages/studentRegister';
+import FacultyLoginforCourse from './pages/facultyLoginforCourse';
+import FacultyRegister from './pages/facultyRegister';
+import FacultyHomePage from './pages/facultyHomePage';
+import AddCourse from './pages/addCourse';
 
 const App = () => {
   return (
@@ -20,8 +25,13 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/addstudent" element={<AddStudent />} />
+          <Route path="/facultyloginforcourse" element={<FacultyLoginforCourse/>}/>
           <Route path="/studentlogin" element={<StudentLogin />} />
+          <Route path="/learninghomepage" element={<CoursePage />} />
+          <Route path="/studentregister" element={<StudentRegister />} />
+          <Route path="/facultyregister" element={<FacultyRegister />} />
+          <Route path='/facultyhomepage' element={<FacultyHomePage/>}/>
+          <Route path='/addcourse' element={<AddCourse/>}/>
         </Routes>
       </BrowserRouter>
     </>

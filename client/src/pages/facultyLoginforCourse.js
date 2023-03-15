@@ -2,12 +2,13 @@ import React from 'react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
-const StudentLogin = () => {
+
+const FacultyLoginforCourse = () => {
     const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-    const LoginStudent = async (e) => {
+    const LoginFaculty = async (e) => {
         e.preventDefault();
-        const response = await fetch("http://localhost:1337/api/studentlogin", {
+        const response = await fetch("http://localhost:1337/api/facultyloginforcourse", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -20,7 +21,7 @@ const StudentLogin = () => {
          if  (data.user) {
             //save the auth token and redirect
             alert('Login Successful')
-          window.location.href='/courseHomePage'
+          window.location.href='/facultyhomepage'
         }
         else{
             alert('Login Fail')
@@ -29,7 +30,7 @@ const StudentLogin = () => {
   return (
     <div className="App">
       <h1>Login</h1>
-      <form onSubmit={LoginStudent}>
+      <form onSubmit={LoginFaculty}>
        
         <input value={email}
           onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"></input><br/>
@@ -37,10 +38,11 @@ const StudentLogin = () => {
           onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
           <input type="submit" value="Login" />
           <br></br>
-          <>Don't have account - </><NavLink to="/studentregister"> Register</NavLink>
+          <>Don't have account - </><NavLink to="/facultyregister"> Register</NavLink>
       </form>
     </div>
   )
 }
 
-export default StudentLogin
+
+export default FacultyLoginforCourse

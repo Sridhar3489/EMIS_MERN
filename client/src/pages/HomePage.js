@@ -13,7 +13,7 @@ const HomePage = () => {
     
     <NavLink className="aaa" to="/login">Login</NavLink>
 
-    <NavLink className="aaa" to="/studentlogin">Student Login</NavLink>
+    <NavLink className="aaa" to="/learninghomepage">Learning Platform</NavLink>
     
     </>
   )
