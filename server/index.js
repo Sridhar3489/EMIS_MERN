@@ -86,6 +86,46 @@ app.post('/api/addstudent',async(req,res)=>{
     
 })
 
+app.get('/api/allStudents',async(req,res)=>{
+    try{
+    const students=await Stud.find({});
+    res.status(200).json(students);
+    }
+    catch(err){
+        res.status(404).json({message: error.message});
+    }
+})
+
+app.get('/api/:id',async(req,res)=>{
+    try{
+    const student=await Stud.find({_id:req.params.id});
+    res.status(200).json(student);
+    }
+    catch(err){
+        res.status(404).json({message: error.message});
+    }
+})
+
+app.put('/api/edit/:id',async(req,res)=>{
+    
+    try{
+    await Stud.updateOne({_id:req.params.id},req.body);
+    res.status(201).json({status:'ok'});
+    }
+    catch(err){
+        res.status(404).json({message: error.message});
+    }
+})
+
+app.delete('/api/delete/:id',async(req,res)=>{ 
+    try{
+    await Stud.deleteOne({_id:req.params.id});
+    res.status(201).json({status:'ok'});
+    }
+    catch(err){
+        res.status(404).json({message: error.message});
+    }
+})
 app.listen(1337,()=>{
     console.log("server started on 1337")
 })

@@ -5,7 +5,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import HomePage from './pages/HomePage';
-import AddStudent from './pages/addStudent'
+import AddStudent from './pages/addStudent';
+import AllStudent from './pages/allStudent';
+import EditStudent from './pages/editStudent';
 import StudentLogin from './pages/studentLogin';
 
 const App = () => {
@@ -21,6 +23,8 @@ const App = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/addstudent" element={<AddStudent />} />
+          <Route path="/allStudents" element={<AllStudent />} />
+          <Route path="/editStudent/:id" element={<EditStudent />} />
           <Route path="/studentlogin" element={<StudentLogin />} />
         </Routes>
       </BrowserRouter>

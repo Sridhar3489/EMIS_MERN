@@ -10,7 +10,5 @@ const Stud=new mongoose.Schema({
 {
     collection:'student-data'
 })
-
-const model=mongoose.model('Student',Stud)
-
+const model=mongoose.model('Student',Stud);
 module.exports=model
