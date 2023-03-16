@@ -16,7 +16,7 @@ const EditStudent = () => {
     useEffect(()=>{
     async function get(){
       try{
-        let response=await axios.get(`${url}/${id}`);
+        let response=await axios.get(`${url}/student/${id}`);
         setName(response.data[0].name);
         setEmail(response.data[0].email);
         setPassword(response.data[0].password);

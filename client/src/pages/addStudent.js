@@ -12,7 +12,7 @@ const AddStudent = () => {
     
     async function addStud(event){
       event.preventDefault();
-      const response=await fetch('http://localhost:1337/api/addStudent',{
+      const response=await fetch('http://localhost:1337/api/addstudent',{
         method:'POST',
         headers:{
           'Content-Type':'application/json',

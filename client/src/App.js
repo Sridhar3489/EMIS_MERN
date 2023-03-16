@@ -8,6 +8,9 @@ import HomePage from './pages/HomePage';
 import AddStudent from './pages/addStudent';
 import AllStudent from './pages/allStudent';
 import EditStudent from './pages/editStudent';
+import AddVideo from './pages/addVideo';
+import AllVideos from './pages/allVideos';
+import DisplayVideo from './pages/displayVideo';
 import StudentLogin from './pages/studentLogin';
 
 const App = () => {
@@ -25,6 +28,9 @@ const App = () => {
           <Route path="/addstudent" element={<AddStudent />} />
           <Route path="/allStudents" element={<AllStudent />} />
           <Route path="/editStudent/:id" element={<EditStudent />} />
+          <Route path="/addvideo" element={<AddVideo />} />
+          <Route path="/allvideos" element={<AllVideos />} />
+          <Route path="/displayvideo/:id" element={<DisplayVideo />} />
           <Route path="/studentlogin" element={<StudentLogin />} />
         </Routes>
       </BrowserRouter>
