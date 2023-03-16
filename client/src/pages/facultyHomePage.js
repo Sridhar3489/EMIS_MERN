@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 const FacultyHomePage = () => {
   return (
     <div>Your Teachings
-      <NavLink to="/addCourse">Add course</NavLink>
+      <NavLink to="/image">Add course</NavLink>
     </div>
   )
 }

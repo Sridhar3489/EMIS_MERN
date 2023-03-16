@@ -12,7 +12,8 @@ import FacultyLoginforCourse from './pages/facultyLoginforCourse';
 import FacultyRegister from './pages/facultyRegister';
 import FacultyHomePage from './pages/facultyHomePage';
 import AddCourse from './pages/addCourse';
-
+import Image from './pages/image';
+import Video from './pages/video';
 const App = () => {
   return (
 
@@ -32,6 +33,8 @@ const App = () => {
           <Route path="/facultyregister" element={<FacultyRegister />} />
           <Route path='/facultyhomepage' element={<FacultyHomePage/>}/>
           <Route path='/addcourse' element={<AddCourse/>}/>
+          <Route path='/image' element={<Image/>}/>
+          <Route path='/video/:id' element={<Video/>}/>
         </Routes>
       </BrowserRouter>
     </>

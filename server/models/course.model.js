@@ -1,8 +1,12 @@
 const mongoose=require("mongoose")
 
 const Course=new mongoose.Schema({
-    title:{type:String,required:true},
-    author:{type:String,required:true}
+    
+    courseid:{type:Number,required:true},
+    title:{type:String},
+    author:{type:String},
+    imageUrl:{type:String},
+    videoUrl:{type:String}
 },
 {
     collection:'course-data'
