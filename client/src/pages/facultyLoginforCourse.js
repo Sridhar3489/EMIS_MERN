@@ -17,11 +17,10 @@ const FacultyLoginforCourse = () => {
             body: JSON.stringify({ email, password})
         });
         const data = await response.json();
-        console.log(data);
          if  (data.user) {
             //save the auth token and redirect
             alert('Login Successful')
-          window.location.href='/facultyhomepage'
+          window.location.href=`/facultyhomepage/${data.user[0]._id}`
         }
         else{
             alert('Login Fail')
@@ -38,7 +37,6 @@ const FacultyLoginforCourse = () => {
           onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
           <input type="submit" value="Login" />
           <br></br>
-          <>Don't have account - </><NavLink to="/facultyregister"> Register</NavLink>
       </form>
     </div>
   )

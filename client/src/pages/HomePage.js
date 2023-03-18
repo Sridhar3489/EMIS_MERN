@@ -8,8 +8,16 @@ const HomePage = () => {
     <h1>
         EMIS
     </h1>
+
+    <h2>
+      Login as
+    </h2>
     
-    <NavLink className="aaa" to="/register">Register</NavLink>
+    <NavLink className="aaa" to="/login">Admin</NavLink>
+    <br>
+    </br>
+    <br></br>
+    <NavLink className="aaa" to="/districtlogin">District Head</NavLink>
     
     <NavLink className="aaa" to="/login">Login</NavLink>
 

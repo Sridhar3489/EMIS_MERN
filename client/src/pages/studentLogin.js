@@ -37,7 +37,6 @@ const StudentLogin = () => {
           onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
           <input type="submit" value="Login" />
           <br></br>
-          <>Don't have account - </><NavLink to="/studentregister"> Register</NavLink>
       </form>
     </div>
   )

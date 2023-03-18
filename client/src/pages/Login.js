@@ -6,7 +6,6 @@ const Login = () => {
     
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role,setRole]=useState('')
   
  async function LoginUser(event){
     event.preventDefault();
@@ -24,7 +23,7 @@ const Login = () => {
     const data = await response.json()
     if(data.user){
       alert('Login Successful')
-      window.location.href='/dashboard'
+      window.location.href=`/dashboard/${data.user[0]._id}`
     }
     else{
       alert('Please check login credentials')

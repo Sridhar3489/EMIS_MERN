@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 const FacultyRegister = () => {
+  const { id }=useParams()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [subject,setSubject]=useState('')
+    const [school,setSchool]=useState('')
     async function registerUser(event){
         event.preventDefault();
         const response=await fetch('http://localhost:1337/api/facultyregister',{
@@ -17,18 +20,22 @@ const FacultyRegister = () => {
             name,
             email,
             password,
-            subject
+            subject,
+            school
           }),
         })
         const data = await response.json()
         if(data.status==='ok'){
-          alert("User registered, please Login to continue")
-          window.location.href='/facultyloginforcourse'
+          alert("Faculty Registered Succesfully")
+          window.location.href='/dashboard/:id'
+        }
+        else{
+          alert("Not registered !!! Kindly check details once again")
         }
       }
   return (
     <div>hii there
-        <h1>Register</h1>
+        <h1>Faculty Register</h1>
         <form onSubmit={registerUser}>
           <input
             value={name}
@@ -40,6 +47,8 @@ const FacultyRegister = () => {
             onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
             
             <input value={subject} placeholder='Subject' onChange={(e)=>setSubject(e.target.value)} type="text"></input>
+            <br></br>
+            <input value={school} placeholder='School' onChange={(e)=>setSchool(e.target.value)} type="text"></input>
             <br></br>
             <input type="submit" value="Register" />
             </form>
