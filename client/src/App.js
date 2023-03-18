@@ -11,6 +11,7 @@ import EditStudent from './pages/editStudent';
 import AddVideo from './pages/addVideo';
 import AllVideos from './pages/allVideos';
 import DisplayVideo from './pages/displayVideo';
+import Graphs from './pages/graphs';
 import StudentLogin from './pages/studentLogin';
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/addvideo" element={<AddVideo />} />
           <Route path="/allvideos" element={<AllVideos />} />
           <Route path="/displayvideo/:id" element={<DisplayVideo />} />
+          <Route path="/graphs" element={<Graphs />} />
           <Route path="/studentlogin" element={<StudentLogin />} />
         </Routes>
       </BrowserRouter>
