@@ -1,10 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import './style.css'
+import './bgcss.css'
 
 const HomePage = () => {
   return (
-    <>
+    <div className='page'>
     <h1>
         EMIS
     </h1>
@@ -18,12 +18,14 @@ const HomePage = () => {
     </br>
     <br></br>
     <NavLink className="aaa" to="/districtlogin">District Head</NavLink>
-    
-    <NavLink className="aaa" to="/login">Login</NavLink>
-
+    <br></br>
+    <br></br>
+    <NavLink className="aaa" to="/schoollogin">School Head</NavLink>
+    <br></br>
+    <br></br>
     <NavLink className="aaa" to="/learninghomepage">Learning Platform</NavLink>
     
-    </>
+    </div>
   )
 }
 

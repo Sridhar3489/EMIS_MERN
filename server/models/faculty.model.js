@@ -6,6 +6,7 @@ const Faculty=new mongoose.Schema({
     password:{type:String,required:true},
     subject:{type:String,required:true},
     school:{type:String,required:true},
+    dist:{type:String,required:true},
     schoolid:{type:mongoose.Schema.Types.ObjectId,ref:'School'},
     distid:{type:mongoose.Schema.Types.ObjectId,ref:'District'}
 },

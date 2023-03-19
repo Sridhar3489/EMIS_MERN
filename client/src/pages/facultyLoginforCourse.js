@@ -1,9 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 
 const FacultyLoginforCourse = () => {
+  const {id,type}=useParams()
     const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
     const LoginFaculty = async (e) => {
@@ -20,7 +22,7 @@ const FacultyLoginforCourse = () => {
          if  (data.user) {
             //save the auth token and redirect
             alert('Login Successful')
-          window.location.href=`/facultyhomepage/${data.user[0]._id}`
+          window.location.href=`/facultyhomepage/${type}/${data.user[0]._id}`
         }
         else{
             alert('Login Fail')

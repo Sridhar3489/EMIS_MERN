@@ -25,12 +25,12 @@ const TBody = styled(TableRow)`
 
 const url = 'http://localhost:1337/api';
 const AllDistrict = () => {
-  const {id}=useParams()
+  const {id,type}=useParams()
   const [District, setDistrict] = useState([])
   useEffect(() => {
     async function getDist() {
       try {
-        let response = await axios.get('http://localhost:1337/api/alldistricts');
+        let response = await axios.get(`http://localhost:1337/api/alldistricts/${type}/${id}`);
         console.log(response);
         setDistrict(response.data)
       }
@@ -45,7 +45,7 @@ const AllDistrict = () => {
     try {
       await axios.delete(`${url}/deletedist/${idd}`);
       alert("Deleted Successfully");
-      window.location.href = `/alldistrict/${id}`
+      window.location.href = `/alldistrict/${type}/${id}`
     }
     catch (err) {
       console.log("error while calling delete user api", err);
@@ -70,7 +70,7 @@ const AllDistrict = () => {
               <TableCell>{distr.email}</TableCell>
               <TableCell>{distr.dist}</TableCell>
               <TableCell>
-                <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editdistrict/${distr._id}`}>Edit</Button>
+                <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editdistrict/${type}/${distr._id}`}>Edit</Button>
                 <Button variant="contained" color="secondary" onClick={() => deleteDist(distr._id)}>Delete</Button>
               </TableCell>
             </TBody>

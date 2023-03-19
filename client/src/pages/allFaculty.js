@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+
 const StyledTable = styled(Table)`
  width: 90%;
  margin:50px auto 0 auto;
@@ -25,12 +26,12 @@ const TBody = styled(TableRow)`
 
 const url = 'http://localhost:1337/api';
 const AllFaculty = () => {
-  const {id}=useParams()
+  const {id,type}=useParams()
   const [Faculty, setFaculty] = useState([])
   useEffect(() => {
     async function getFac() {
       try {
-        let response = await axios.get('http://localhost:1337/api/allfaculty');
+        let response = await axios.get(`http://localhost:1337/api/allfaculty/${type}/${id}`);
         console.log(response);
         setFaculty(response.data)
       }
@@ -45,7 +46,7 @@ const AllFaculty = () => {
     try {
       await axios.delete(`${url}/deletefac/${idd}`);
       alert("Deleted Successfully");
-      window.location.href = `/allfaculty/${id}`
+      window.location.href = `/allfaculty/${type}/${id}`
     }
     catch (err) {
       console.log("error while calling delete user api", err);
@@ -72,7 +73,7 @@ const AllFaculty = () => {
               <TableCell>{fac.subject}</TableCell>
               <TableCell>{fac.school}</TableCell>
               <TableCell>
-                <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editfac/${fac._id}`}>Edit</Button>
+                <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editfac/${type}/${fac._id}`}>Edit</Button>
                 <Button variant="contained" color="secondary" onClick={() => deleteFac(fac._id)}>Delete</Button>
               </TableCell>
             </TBody>

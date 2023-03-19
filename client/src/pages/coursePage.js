@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const CoursePage = () => {
   return (
-    <div>
+    <div className='page'>
         Login as
         <NavLink className="aaa" to="/studentlogin">Student</NavLink>
         <NavLink className="aaa" to="/facultyloginforcourse">Faculty</NavLink>

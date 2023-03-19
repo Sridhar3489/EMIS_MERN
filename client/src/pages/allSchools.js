@@ -25,12 +25,12 @@ const TBody = styled(TableRow)`
 
 const url = 'http://localhost:1337/api';
 const AllSchools = () => {
-  const {id}=useParams()
+  const {id,type}=useParams()
   const [School, setSchool] = useState([])
   useEffect(() => {
     async function getSchl() {
       try {
-        let response = await axios.get('http://localhost:1337/api/allschools');
+        let response = await axios.get(`http://localhost:1337/api/allschools/${type}/${id}`);
         console.log(response);
         setSchool(response.data)
       }
@@ -45,7 +45,7 @@ const AllSchools = () => {
     try {
       await axios.delete(`${url}/deleteschl/${idd}`);
       alert("Deleted Successfully");
-      window.location.href = `/allschool/${id}`
+      window.location.href = `/allschool/${type}/${id}`
     }
     catch (err) {
       console.log("error while calling delete user api", err);
@@ -70,7 +70,7 @@ const AllSchools = () => {
               <TableCell>{schl.email}</TableCell>
              <TableCell>{schl.distr}</TableCell>
               <TableCell>
-                <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editschool/${schl._id}`}>Edit</Button>
+                <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editschool/${type}/${schl._id}`}>Edit</Button>
                 <Button variant="contained" color="secondary" onClick={() => deleteSchl(schl._id)}>Delete</Button>
               </TableCell>
             </TBody>

@@ -1,12 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 const AddCourse= () => {
+  const {id,type}=useParams()
     const [title, setTitle] = useState('')
     const [author, setAuthor] = useState('')
     async function courseadd(event){
         event.preventDefault();
-        const response=await fetch('http://localhost:1337/api/addcourse',{
+        const response=await fetch(`http://localhost:1337/api/addcourse/${type}/${id}`,{
           method:'POST',
           headers:{
             'Content-Type':'application/json',

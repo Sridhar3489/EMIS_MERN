@@ -2,9 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { styled,FormControl,Input,Button, InputLabel } from '@mui/material';
+import { useParams } from 'react-router-dom';
 const FormData=require('form-data');
 const AddVideo = () => {
-
+  const {id,type}=useParams()
   const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [imageUrl, setImageUrl] = useState('');
@@ -20,7 +21,7 @@ const AddVideo = () => {
         formData.append('videoUrl',videoUrl);
         try{
             console.log("before");
-       const response= await axios.post('http://localhost:1337/api/video',formData);
+       const response= await axios.post(`http://localhost:1337/api/video/${type}/${id}`,formData);
        console.log("after");
         if(response.data["status"]==='ok')
       alert("Video uploaded");

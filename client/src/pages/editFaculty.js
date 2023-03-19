@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 const EditFaculty = () => {
-    const {id}=useParams();
+    const {id,type}=useParams();
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -16,7 +16,7 @@ const EditFaculty = () => {
     useEffect(()=>{
     async function get(){
       try{
-        let response=await axios.get(`${url}/faculty/${id}`);
+        let response=await axios.get(`${url}/faculty/${type}/${id}`);
         setName(response.data[0].name);
         setEmail(response.data[0].email);
         setPassword(response.data[0].password);
@@ -32,7 +32,7 @@ const EditFaculty = () => {
     async function editFac(){
       const Faculty={name,email,password,subject,school};
       console.log("before axios");
-      const response=await axios.put(`${url}/editfac/${id}`,Faculty);
+      const response=await axios.put(`${url}/editfac/${type}/${id}`,Faculty);
       alert("Updated Successfully");
       //window.location.href=`/alldistrict/${id}`
     }

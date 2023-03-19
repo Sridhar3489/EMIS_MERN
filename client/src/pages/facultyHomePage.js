@@ -5,10 +5,10 @@ import './style.css'
 
 
 const FacultyHomePage = () => {
-  const {id}=useParams()
+  const {id,type}=useParams()
   
   return (
-    <NavLink to={`addvideo/${id}`}>Add Video</NavLink>
+    <NavLink to={`http://localhost:3000/addvideo/${type}/${id}`}>Add Video</NavLink>
     
   )
 }

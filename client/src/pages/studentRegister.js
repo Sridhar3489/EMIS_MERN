@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 const StudentRegister = () => {
-  const {id}=useParams()
+  const {id,type}=useParams()
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -13,7 +13,7 @@ const StudentRegister = () => {
     const [gender,setGender]=useState('')
     async function registerUser(event){
         event.preventDefault();
-        const response=await fetch('http://localhost:1337/api/studentregister',{
+        const response=await fetch(`http://localhost:1337/api/studentregister/${type}/${id}`,{
           method:'POST',
           headers:{
             'Content-Type':'application/json',
@@ -31,7 +31,7 @@ const StudentRegister = () => {
         const data = await response.json()
         if(data.status==='ok'){
           alert("Student registered succesfully")
-          window.location.href=`/dashboard/${id}`
+          window.location.href=`/dashboard/${type}/${id}`
         }
       }
   return (

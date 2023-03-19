@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 const Login = () => {
-    
+    const type="admin";
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   
@@ -22,11 +22,9 @@ const Login = () => {
       }),
     })
     const data = await response.json()
-
-    if(data.user){
-      alert('Login Successful')
-      
-      window.location.href=`/dashboard/${data.user[0]._id}`
+    if(data.user!=''){
+      alert('Login Successful');
+      window.location.href=`/dashboard/${type}/${data.user[0]._id}`;
     }
     else{
       alert('Please check login credentials')

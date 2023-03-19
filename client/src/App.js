@@ -25,6 +25,8 @@ import AllStudents from './pages/allStudent';
 import EditStudent from './pages/editStudent';
 import AddVideo from './pages/addVideo';
 import AllVideos from './pages/allVideos';
+import SchoolLogin from './pages/schoolLogin';
+import DistrictDashboard from './pages/districtDashboard';
 
 const App = () => {
   return (
@@ -38,27 +40,29 @@ const App = () => {
         <Route path="/homepage" element={<HomePage/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard/:id" element={<Dashboard />} />
+          <Route path="/dashboard/:type/:id" element={<Dashboard />} />
           <Route path="/facultyloginforcourse" element={<FacultyLoginforCourse/>}/>
           <Route path="/studentlogin" element={<StudentLogin />} />
           <Route path="/learninghomepage" element={<CoursePage />} />
-          <Route path="/studentregister/:id" element={<StudentRegister />} />
-          <Route path="/facultyregister/:id" element={<FacultyRegister />} />
-          <Route path='/facultyhomepage/:id' element={<FacultyHomePage/>}/>
-          <Route path='/addcourse' element={<AddCourse/>}/>
+          <Route path="/studentregister/:type/:id" element={<StudentRegister />} />
+          <Route path="/facultyregister/:type/:id" element={<FacultyRegister />} />
+          <Route path='/facultyhomepage/:type/:id' element={<FacultyHomePage/>}/>
+          <Route path='/addcourse/:type/:id' element={<AddCourse/>}/>
           <Route path="/districtlogin" element={<DistrictLogin />} />
-          <Route path="/districtregister/:id" element={<DistrictRegister />} />
-          <Route path="/alldistrict/:id" element={<AllDistrict />} />
-          <Route path='/schoolregister/:id' element={<SchoolRegister/>}/>
-          <Route path='/allschool/:id' element={<AllSchools/>}/>
-          <Route path='/editdistrict/:id' element={<EditDistrict/>}/>
-          <Route path='/editschool/:id' element={<EditSchool/>}/>
-          <Route path='/allfaculty/:id' element={<AllFaculty/>}/>
-          <Route path='/editfac/:id' element={<EditFaculty/>}/>
-          <Route path='/allstudent/:id' element={<AllStudents/>}/>
-          <Route path='/editstud/:id' element={<EditStudent/>}/>
-          <Route path='/addvideo' element={<AddVideo/>}/>
-          <Route path='/allvideo' element={<AllVideos/>}/>
+          <Route path="/districtregister/:type/:id" element={<DistrictRegister />} />
+          <Route path="/alldistrict/:type/:id" element={<AllDistrict />} />
+          <Route path='/schoolregister/:type/:id' element={<SchoolRegister/>}/>
+          <Route path='/allschool/:type/:id' element={<AllSchools/>}/>
+          <Route path='/editdistrict/:type/:id' element={<EditDistrict/>}/>
+          <Route path='/editschool/:type/:id' element={<EditSchool/>}/>
+          <Route path='/allfaculty/:type/:id' element={<AllFaculty/>}/>
+          <Route path='/editfac/:type/:id' element={<EditFaculty/>}/>
+          <Route path='/allstudent/:type/:id' element={<AllStudents/>}/>
+          <Route path='/editstud/:type/:id' element={<EditStudent/>}/>
+          <Route path="/schoollogin" element={<SchoolLogin/>}/>
+          <Route path='/addvideo/:type/:id' element={<AddVideo/>}/>
+          <Route path='/allvideo/:type/:id' element={<AllVideos/>}/>
+          <Route path='/districtdashboard/:type/:id' element={<DistrictDashboard/>}/>
         </Routes>
       </BrowserRouter>
     </>

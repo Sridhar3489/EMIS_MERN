@@ -2,13 +2,15 @@ import React from 'react';
 import {useEffect,useState} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 const url='http://localhost:1337/api';
 const AllVideos = () => {
+  const {id,type}=useParams();
     const [videos,setVideos]=useState([]);
     useEffect(()=>{
       async function getVid(){
       try{
-     let response= await axios.get(`${url}/uploadedVideos`);
+     let response= await axios.get(`${url}/uploadedVideos//${type}/${id}`);
      setVideos(response.data);
      console.log(response);
       }
@@ -34,7 +36,7 @@ const AllVideos = () => {
         flexDirection:'column',
         alignItems:'center',
         justifyContent:'center',}}>
-       <Link to={`/displayvideo/${vid._id}`} > <img width="100%" height="200px" src={`http://localhost:1337/${vid.imageUrl}`}/></Link>
+       <Link to={`/displayvideo/${type}/${vid._id}`} > <img width="100%" height="200px" src={`http://localhost:1337/${type}/${vid.imageUrl}`}/></Link>
         <div>{vid.title}</div>
         <div>{vid.description}</div>
     </div>);})} 

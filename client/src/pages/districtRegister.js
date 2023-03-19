@@ -3,14 +3,14 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 const DistrictRegister = () => {
-    const {id}=useParams();
+    const {id,type}=useParams();
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [dist,setDist]=useState('')
     async function registerDist(event){
         event.preventDefault();
-        const response=await fetch('http://localhost:1337/api/districtregister',{
+        const response=await fetch(`http://localhost:1337/api/districtregister/${type}/${id}`,{
           method:'POST',
           headers:{
             'Content-Type':'application/json',
@@ -25,14 +25,14 @@ const DistrictRegister = () => {
         const data = await response.json()
         if(data.status==='ok'){
           alert("District Head registered succesfully")
-          window.location.href=`/dashboard/${id}`
+          window.location.href=`/dashboard/${type}/${id}`
         }
         else{
             alert("Not registered!!! Check details once again")
         }
       }
   return (
-    <div>hii there
+    <div className='page'>hii there
         <h1>Register District Head </h1>
         <form onSubmit={registerDist}>
           <input

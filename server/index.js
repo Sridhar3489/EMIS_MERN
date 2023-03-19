@@ -16,8 +16,6 @@ app.use(express.urlencoded({ extended : true }));
 
 app.use(express.json());
 
-app.use('/',express.static('/uploads'))
-
 const User=require('./models/user.model')
 
 const Stud=require('./models/student.model')
@@ -62,13 +60,28 @@ app.post('/api/login',async(req,res)=>{
    }
    )
    if(user){
-    return res.json({user})
+    return res.json({status:"ok",user})
    }
    else{
-    return res.json({status:'error',user:false})
+    return res.json(false)
    }
     
 })
+
+app.post('/api/distlogin',async(req,res)=>{
+    const user=await District.find({
+     email:req.body.email,
+     password:req.body.password
+    }
+    )
+    if(user){
+     return res.json({status:"ok",user})
+    }
+    else{
+     return res.json(false)
+    }
+     
+ })
 
 app.post('/api/studentlogin',async(req,res)=>{
     const user=await Stud.findOne({
@@ -89,7 +102,7 @@ app.post('/api/studentlogin',async(req,res)=>{
 })
 
 
-app.post('/api/studentregister',async(req,res)=>{
+app.post('/api/studentregister/:type/:id',async(req,res)=>{
     console.log(req.body)
     try{
         await Stud.create({
@@ -108,7 +121,7 @@ app.post('/api/studentregister',async(req,res)=>{
     
 })
 
-app.post('/api/districtregister',async(req,res)=>{
+app.post('/api/districtregister/:type/:id',async(req,res)=>{
     console.log(req.body)
     try{
         const response=await District.create({
@@ -125,27 +138,41 @@ app.post('/api/districtregister',async(req,res)=>{
     
 })
 
-app.get('/api/alldistricts',async(req,res)=>{
+app.get('/api/alldistricts/:type/:id',async(req,res)=>{
     try{
-    const districts=await District.find({});
-    return res.status(200).json(districts);
+        if(req.params.type=='distr'){
+            const districts=await District.find({_id:req.params.id});
+            return res.status(200).json(districts);
+        }
+        if(req.params.type=='admin'){
+            const districts=await District.find({});
+            return res.status(200).json(districts);
+        }  
     }
     catch(err){
         res.status(404).json({message: err.message});
     }
 })
 
-app.get('/api/allschools',async(req,res)=>{
+app.get('/api/allschools/:type/:id',async(req,res)=>{
     try{
-    const school=await School.find({});
-    return res.status(200).json(school);
+        if(req.params.type=='distr'){
+            const school=await School.find({distid:req.params.id});
+            return res.status(200).json(school);
+        }
+        if(req.params.type=='admin'){
+            const school=await School.find({});
+            return res.status(200).json(school);
+        }
+        
+    
     }
     catch(err){
         res.status(404).json({message: err.message});
     }
 })
 
-app.get('/api/allfaculty',async(req,res)=>{
+app.get('/api/allfaculty/:type/:id',async(req,res)=>{
     try{
     const school=await Faculty.find({});
     return res.status(200).json(school);
@@ -155,7 +182,7 @@ app.get('/api/allfaculty',async(req,res)=>{
     }
 })
 
-app.get('/api/allstud',async(req,res)=>{
+app.get('/api/allstud/:type/:id',async(req,res)=>{
     try{
     const stud=await Stud.find({});
     return res.status(200).json(stud);
@@ -205,7 +232,7 @@ app.delete('/api/deletestud/:id',async(req,res)=>{
     }
 })
 
-app.get('/api/district/:id',async(req,res)=>{
+app.get('/api/district/:type/:id',async(req,res)=>{
     try{
     const distrk=await District.find({_id:req.params.id});
     res.status(200).json(distrk);
@@ -215,7 +242,7 @@ app.get('/api/district/:id',async(req,res)=>{
     }
 })
 
-app.get('/api/school/:id',async(req,res)=>{
+app.get('/api/school/:type/:id',async(req,res)=>{
     try{
     const distrk=await School.find({_id:req.params.id});
     res.status(200).json(distrk);
@@ -225,7 +252,7 @@ app.get('/api/school/:id',async(req,res)=>{
     }
 })
 
-app.get('/api/faculty/:id',async(req,res)=>{
+app.get('/api/faculty/:type/:id',async(req,res)=>{
     try{
     const distrk=await Faculty.find({_id:req.params.id});
     res.status(200).json(distrk);
@@ -235,7 +262,7 @@ app.get('/api/faculty/:id',async(req,res)=>{
     }
 })
 
-app.get('/api/student/:id',async(req,res)=>{
+app.get('/api/student/:type/:id',async(req,res)=>{
     try{
     const distrk=await Stud.find({_id:req.params.id});
     res.status(200).json(distrk);
@@ -245,7 +272,7 @@ app.get('/api/student/:id',async(req,res)=>{
     }
 })
 
-app.put('/api/editdist/:id',async(req,res)=>{
+app.put('/api/editdist/:type/:id',async(req,res)=>{
     
     try{
     await District.updateOne({_id:req.params.id},req.body);
@@ -256,7 +283,7 @@ app.put('/api/editdist/:id',async(req,res)=>{
     }
 })
 
-app.put('/api/editschl/:id',async(req,res)=>{
+app.put('/api/editschl/:type/:id',async(req,res)=>{
     
     try{
     await School.updateOne({_id:req.params.id},req.body);
@@ -267,7 +294,7 @@ app.put('/api/editschl/:id',async(req,res)=>{
     }
 })
 
-app.put('/api/editfac/:id',async(req,res)=>{
+app.put('/api/editfac/:type/:id',async(req,res)=>{
     
     try{
     await Faculty.updateOne({_id:req.params.id},req.body);
@@ -278,7 +305,7 @@ app.put('/api/editfac/:id',async(req,res)=>{
     }
 })
 
-app.put('/api/editstud/:id',async(req,res)=>{
+app.put('/api/editstud/:type/:id',async(req,res)=>{
     
     try{
     await Stud.updateOne({_id:req.params.id},req.body);
@@ -308,7 +335,7 @@ app.post('/api/studentlogin',async(req,res)=>{
 })
 
 
-app.post('/api/schoolregister',async(req,res)=>{
+app.post('/api/schoolregister/:type/:id',async(req,res)=>{
     console.log(req.body)
     try{
         const response=await School.create({
@@ -327,12 +354,9 @@ app.post('/api/schoolregister',async(req,res)=>{
     
 })
 
-app.post('/api/search',async(req,res)=>{
-    const x=District.findOne({dist:'abc'})
-    res.json(x)
-})
 
-app.post('/api/facultyregister',async(req,res)=>{
+
+app.post('/api/facultyregister/:type/:id',async(req,res)=>{
     console.log(req.body)
     try{
         await Faculty.create({
@@ -340,7 +364,8 @@ app.post('/api/facultyregister',async(req,res)=>{
             email:req.body.email,
             password:req.body.password,
             subject:req.body.subject,
-            school:req.body.school
+            school:req.body.school,
+            dist:req.body.dist
         })
         res.json({status:'ok'})
     }catch(err){
@@ -363,7 +388,21 @@ app.post('/api/facultyloginforcourse',async(req,res)=>{
     }
 })
 
-app.post('/api/addcourse',async(req,res)=>{
+app.post('/api/schoollogin',async(req,res)=>{
+    const user=await School.find({
+     email:req.body.email,
+     password:req.body.password
+    }
+    )
+    if(user){
+     return res.json({status:'ok'})
+    }
+    else{
+     return res.json({status:'error',user:false})
+    }
+})
+
+app.post('/api/addcourse/:type/:id',async(req,res)=>{
     console.log(req.body)
     try{
         await Course.create({
@@ -396,7 +435,7 @@ app.post('/api/video',cpUpload,async(req,res)=>{
     
 })
 
-app.get('/api/uploadedVideos',async(req,res)=>{
+app.get('/api/uploadedVideos/:type/:id',async(req,res)=>{
     try{
     const vi=await video.find({});
     res.status(200).json(vi);
@@ -406,7 +445,7 @@ app.get('/api/uploadedVideos',async(req,res)=>{
     }
 })
 
-app.get('/api/getvideo/:id',async(req,res)=>{
+app.get('/api/getvideo/:type/:id',async(req,res)=>{
     try{
     const vid=await video.find({_id:req.params.id});
     res.status(200).json(vid);

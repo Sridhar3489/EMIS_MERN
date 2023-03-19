@@ -1,15 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import './bgcss.css'
 
 
-const DistrictLogin = () => {
+const SchoolLogin = () => {
+  const type="school";
     const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const type="distr";
     const LoginDistrict = async (e) => {
         e.preventDefault();
-        const response = await fetch("http://localhost:1337/api/distlogin", {
+        const response = await fetch("http://localhost:1337/api/schoollogin", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -18,19 +19,18 @@ const DistrictLogin = () => {
             body: JSON.stringify({ email, password})
         });
         const data = await response.json();
-        console.log(response['facultyobj']);
-        console.log(data.facultyobj)
-         if  (data.user!='') {
+        
+         if  (data.user) {
             //save the auth token and redirect
             alert('Login Successful')
-          window.location.href=`/districtdashboard/${type}/${data.user[0]._id}`
+
         }
         else{
             alert('Login Fail')
         }
     }
   return (
-    <div className="App">
+    <div className="page">
       <h1>Login</h1>
       <form onSubmit={LoginDistrict}>
        
@@ -46,4 +46,4 @@ const DistrictLogin = () => {
 }
 
 
-export default DistrictLogin
+export default SchoolLogin
