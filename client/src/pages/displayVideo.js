@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import axios from 'axios';
-import ReactPlayer from 'react-player';
+// import ReactPlayer from 'react-player';
 const DisplayVideo = () => {
 
     const [videoUrl, setVideoUrl] = useState('')

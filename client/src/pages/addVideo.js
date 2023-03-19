@@ -10,14 +10,7 @@ const AddVideo = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [videoUrl, setVideoUrl]=useState('');
     
-    const Form=styled(FormControl)`
-    border:1px solid black;
-    border-radius:5px;
-    width:30%;
-    margin-top:100px;
-    box-shadow: 5px 25px 20px 50px lightblue;
 
-    `
     async function addVideo(event){
         event.preventDefault();
         const formData=new FormData();
@@ -45,15 +38,15 @@ const AddVideo = () => {
     <div className="App">
         <h1>Add Video</h1>
         <center>
-        <Form onSubmit={addVideo} >
-         <InputLabel>Title</InputLabel>   
-        <Input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder="Title"/>
-        <Input value={description} onChange={(e) => setDescription(e.target.value)} type="text" placeholder="Description"/>
-         Add Preview Image <Input  onChange={(e) => setImageUrl(e.target.files[0])} type="file" name="imageUrl"/>
-         Add Video<Input onChange={(e) => setVideoUrl(e.target.files[0])} type="file" name="videoUrl"/>
+        <form onSubmit={addVideo} >
+         <div>Title</div>   
+        <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder="Title"/>
+        <input value={description} onChange={(e) => setDescription(e.target.value)} type="text" placeholder="Description"/>
+         Add Preview Image <input  onChange={(e) => setImageUrl(e.target.files[0])} type="file" name="imageUrl"/>
+         Add Video<input onChange={(e) => setVideoUrl(e.target.files[0])} type="file" name="videoUrl"/>
             
-            <Button type="submit" variant="contained" color="primary">Upload</Button> 
-        </Form>
+            <input type="submit" variant="contained" color="primary" value="upload"/>
+        </form>
         </center>
       </div>
   );
