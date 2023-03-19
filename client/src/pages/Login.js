@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios';
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
@@ -21,8 +22,10 @@ const Login = () => {
       }),
     })
     const data = await response.json()
+
     if(data.user){
       alert('Login Successful')
+      
       window.location.href=`/dashboard/${data.user[0]._id}`
     }
     else{

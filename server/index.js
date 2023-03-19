@@ -316,6 +316,7 @@ app.post('/api/schoolregister',async(req,res)=>{
             email:req.body.email,
             password:req.body.password,
             distr:req.body.distr,
+            distid:req.body.distid,
         })
         //res.json(res.distid)
         res.json({status:'ok'})

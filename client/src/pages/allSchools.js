@@ -68,7 +68,7 @@ const AllSchools = () => {
             <TBody>
               <TableCell>{schl.name}</TableCell>
               <TableCell>{schl.email}</TableCell>
-              <TableCell>{schl.distr}</TableCell>
+             <TableCell>{schl.distr}</TableCell>
               <TableCell>
                 <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editschool/${schl._id}`}>Edit</Button>
                 <Button variant="contained" color="secondary" onClick={() => deleteSchl(schl._id)}>Delete</Button>
