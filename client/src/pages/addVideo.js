@@ -25,7 +25,7 @@ const AddVideo = () => {
        console.log("after");
         if(response.data["status"]==='ok')
       alert("Video uploaded");
-      window.location.href="/allvideo"
+      window.location.href=`http://localhost:3000/allvideo/${type}/${id}`;
         }
         catch(err)
         {

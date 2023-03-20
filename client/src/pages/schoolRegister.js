@@ -26,21 +26,21 @@ const SchoolRegister = () => {
     getDists();
     },[]);
 
-    async function getDist(id){
-      let response;
-      try {
-         response = await axios.get(`http://localhost:1337/api/district/${type}/${id}`);
-        return response.data[0].dist;
+    // async function getDist(id){
+    //   let response;
+    //   try {
+    //      response = await axios.get(`http://localhost:1337/api/district/${type}/${id}`);
+    //     return response.data[0].dist;
       
-      }
-      catch (error) {
-        console.log("Error while fetching district", error)
-      }
+    //   }
+    //   catch (error) {
+    //     console.log("Error while fetching district", error)
+    //   }
      
-    }
+    // }
     async function registerScl(event){
         event.preventDefault();
-         getDist(distid).then(val=>setDistr(val));
+        // getDist(distid).then(val=>setDistr(val));
          console.log(distr)
          console.log(distid)
         const response=await fetch(`http://localhost:1337/api/schoolregister/${type}/${id}`,{
@@ -79,9 +79,15 @@ const SchoolRegister = () => {
           <input value={password}
             onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
            
-           <select value={distid} onChange={(e)=>{setDistId(e.target.value)}}>
+           <select value={distid} onChange={
+            (e)=>{
+              const [did,dname]=e.target.value.split(",");
+              setDistId(did);
+              setDistr(dname);
+              }}>
+                <option>select district</option>
         {alldist.map((d) => (
-          <option value={d._id} key={d._id}>{d.dist}</option>
+          <option value={[d._id,d.dist]} key={d._id}>{d.dist}</option>
         ))}
       </select>
             <br></br>

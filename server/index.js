@@ -10,7 +10,7 @@ const mongoose=require('mongoose')
 
 const multer=require('multer')
 
-const upload=multer({dest:'/uploads'})
+const upload=multer({dest:'uploads/'})
 
 app.use(express.urlencoded({ extended : true }));
 
@@ -418,7 +418,7 @@ app.post('/api/addcourse/:type/:id',async(req,res)=>{
 })
 
 const cpUpload=upload.fields([{name:'imageUrl',maxCount: 1 }, { name: 'videoUrl', maxCount: 1 }]);
-app.post('/api/video',cpUpload,async(req,res)=>{
+app.post('/api/video/:type/:id',cpUpload,async(req,res)=>{
    
     try{
         await video.create({

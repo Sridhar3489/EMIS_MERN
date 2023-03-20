@@ -25,6 +25,7 @@ import AllStudents from './pages/allStudent';
 import EditStudent from './pages/editStudent';
 import AddVideo from './pages/addVideo';
 import AllVideos from './pages/allVideos';
+import DisplayVideo from './pages/displayVideo';
 import SchoolLogin from './pages/schoolLogin';
 import DistrictDashboard from './pages/districtDashboard';
 
@@ -62,6 +63,7 @@ const App = () => {
           <Route path="/schoollogin" element={<SchoolLogin/>}/>
           <Route path='/addvideo/:type/:id' element={<AddVideo/>}/>
           <Route path='/allvideo/:type/:id' element={<AllVideos/>}/>
+          <Route path='/displayvideo/:type/:id' element={<DisplayVideo/>}/>
           <Route path='/districtdashboard/:type/:id' element={<DistrictDashboard/>}/>
         </Routes>
       </BrowserRouter>

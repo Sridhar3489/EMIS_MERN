@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 
 
 const FacultyLoginforCourse = () => {
-  const {id,type}=useParams()
+  const type="faculty";
     const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
     const LoginFaculty = async (e) => {

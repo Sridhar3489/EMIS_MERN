@@ -30,49 +30,56 @@ const FacultyRegister = () => {
     }
     getDists();
   }, []);
-
-  async function getDist(id) {
-    let response;
-    try {
-      response = await axios.get(`http://localhost:1337/api/district/${type}/${id}`);
-      return response.data[0].dist;
-
-    }
-    catch (error) {
-      console.log("Error while fetching district", error)
-    }
-
-  }
-  async function getSchools(id){
-    try {
+  useEffect(()=>{
+    if(distid!=''){
       const x="distr";
-      let response = await axios.get(`http://localhost:1337/api/allschools/${x}/${id}`);
+      fetch(`http://localhost:1337/api/allschools/${x}/${distid}`).then(res=>res.json()).then(data=>setAllSchl(data)).catch(err=>console.error(err));
+      //console.log(allschl);
+    }
+  },[distid])
+
+  // async function getDist(id) {
+  //   let response;
+  //   try {
+  //     response = await axios.get(`http://localhost:1337/api/district/${type}/${id}`);
+  //     return response.data[0].dist;
+
+  //   }
+  //   catch (error) {
+  //     console.log("Error while fetching district", error)
+  //   }
+
+  // }
+  // async function getSchools(id){
+  //   try {
+  //     const x="distr";
+  //     let response = await axios.get(`http://localhost:1337/api/allschools/${x}/${id}`);
       
-      setAllSchl(response.data)
-    }
-    catch (error) {
-      console.log("Error while fetching all schools", error)
-    }
-  }
+  //     setAllSchl(response.data)
+  //   }
+  //   catch (error) {
+  //     console.log("Error while fetching all schools", error)
+  //   }
+  // }
 
-  async function getSchl(id) {
-    let response;
-    try {
-      response = await axios.get(`http://localhost:1337/api/school/${type}/${id}`);
-      return response.data[0].name;
+  // async function getSchl(id) {
+  //   let response;
+  //   try {
+  //     response = await axios.get(`http://localhost:1337/api/school/${type}/${id}`);
+  //     return response.data[0].name;
 
-    }
-    catch (error) {
-      console.log("Error while fetching school", error)
-    }
+  //   }
+  //   catch (error) {
+  //     console.log("Error while fetching school", error)
+  //   }
 
-  }
+  // }
   
   async function registerUser(event) {
     
     event.preventDefault();
-    getSchl(schoolid).then(val=>setSchool(val))
-    getDist(distid).then(val=>setDist(val))
+    // getSchl(schoolid).then(val=>setSchool(val))
+    // getDist(distid).then(val=>setDist(val))
     const response = await fetch(`http://localhost:1337/api/facultyregister/${type}/${id}`, {
       method: 'POST',
       headers: {
@@ -113,19 +120,28 @@ const FacultyRegister = () => {
 
         <input value={subject} placeholder='Subject' onChange={(e) => setSubject(e.target.value)} type="text"></input>
         <br></br>
-        <select value={distid} onChange={(e) => { setDistId(e.target.value);getSchools(distid);console.log(allschl)}}>
+        <select value={[distid,dist]} onChange={(e) => {const [did,dname]=e.target.value.split(",");setDistId(did);setDist(dname);}}>
+          <option>select district</option>
           {alldist.map((d) => (
-            <option value={d._id} key={d._id}>{d.dist}</option>
+            <option value={[d._id,d.dist]} key={d._id}>{d.dist}</option>
           ))}
         </select>
         <br></br>
         
-        {distid &&
-        <select value={schoolid} onChange={(e) => { setSchoolID(e.target.value) }}>
+        {/* {distid && */}
+        <select value={[schoolid,school]} onChange={(e) => { 
+          console.log("hello");
+          const [sid,sname]=e.target.value.split(",");
+          setSchoolID(sid);
+          setSchool(sname); 
+          console.log(schoolid,school);
+        }} >
+           <option>select school</option>
           {allschl.map((d) => (
-            <option value={d._id} key={d._id}>{d.name}</option>
+            <option value={[d._id,d.name]} key={d._id}>{d.name}</option>
           ))}
-        </select>}
+        </select>
+        {/* } */}
         <br></br>
         <input type="submit" value="Register" />
       </form>
