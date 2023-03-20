@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import './loginpage.css'
 
 const Login = () => {
     const type="admin";
@@ -64,16 +65,19 @@ const Login = () => {
 
 
   return (
-    <div className="App">
+    <div className="page">
+      <div className='login-box'>
       <h1>Login</h1>
       <form onSubmit={LoginUser}>
-       
+       <label>Login</label>
         <input value={email}
-          onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"></input><br/>
+          onChange={(e) => setEmail(e.target.value)} type="email" ></input><br/>
+          <label>Password</label>
         <input value={password}
-          onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
+          onChange={(e) => setPassword(e.target.value)} type="password"></input><br/>
           <input type="submit" value="Login" />
       </form>
+      </div>
     </div>
   )
 }

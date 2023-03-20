@@ -5,38 +5,55 @@ import axios from 'axios';
 
 
 const EditSchool = () => {
-    const {id,type}=useParams();
+    const {id,editid,type}=useParams();
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [distr,setDist]=useState('')
+    const [distr,setDistr]=useState('')
+    const [alldist,setAllDist]=useState([]);
+    const [distid,setDistId]=useState('')
     const navigat=useNavigate();
     const url='http://localhost:1337/api';
     useEffect(()=>{
     async function get(){
       try{
-        let response=await axios.get(`${url}/school/${type}/${id}`);
+        let response=await axios.get(`${url}/school/${type}/${editid}`);
         setName(response.data[0].name);
         setEmail(response.data[0].email);
         setPassword(response.data[0].password);
-        setDist(response.data[0].distr);
+        setDistr(response.data[0].distr);
+        setDistId(response.data[0].distid);
       }
       catch(error){
         console.log("error while getting student details in edit",error);
       }
     }
     get();
+    async function getDists(){
+      try {
+        
+        let response = await axios.get(`http://localhost:1337/api/alldistricts/${type}/${id}`);
+        console.log(response.data)
+        setAllDist(response.data)
+      }
+      catch (error) {
+        console.log("Error while fetching all districts", error)
+      }
+    }
+    getDists();
     },[]);
     async function editSchl(){
-      const School={name,email,password,distr};
+      const School={name,email,password,distr,distid};
       console.log("before axios");
-      const response=await axios.put(`${url}/editschl/${type}/${id}`,School);
-      alert("Updated Successfully");
+      const response=await axios.put(`${url}/editschl/${type}/${editid}`,School);
+      if(response){
+        alert("Updated Successfully");
+      }
       //window.location.href=`/alldistrict/${id}`
     }
   return (
     <div>hii there
-        <h1>Edit District Head </h1>
+        <h1>Edit School Head </h1>
         <form onSubmit={editSchl}>
           <input
             value={name}
@@ -46,10 +63,17 @@ const EditSchool = () => {
             onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"></input><br/>
           <input value={password}
             onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
-           
-            <input value={distr} placeholder='District' onChange={(e)=>setDist(e.target.value)} type="text"></input>
-            <br></br>
-           
+            <select value={[distid,distr]} onChange={
+            (e)=>{
+              const [did,dname]=e.target.value.split(",");
+              setDistId(did);
+              setDistr(dname);
+              }}>
+                <option>---select district----</option>
+        {alldist.map((d) => (
+          <option value={[d._id,d.dist]} key={d._id}>{d.dist}</option>
+        ))}
+      </select>
             <input type="submit" value="Submit" />
             </form>
     </div>

@@ -37,43 +37,6 @@ const FacultyRegister = () => {
       //console.log(allschl);
     }
   },[distid])
-
-  // async function getDist(id) {
-  //   let response;
-  //   try {
-  //     response = await axios.get(`http://localhost:1337/api/district/${type}/${id}`);
-  //     return response.data[0].dist;
-
-  //   }
-  //   catch (error) {
-  //     console.log("Error while fetching district", error)
-  //   }
-
-  // }
-  // async function getSchools(id){
-  //   try {
-  //     const x="distr";
-  //     let response = await axios.get(`http://localhost:1337/api/allschools/${x}/${id}`);
-      
-  //     setAllSchl(response.data)
-  //   }
-  //   catch (error) {
-  //     console.log("Error while fetching all schools", error)
-  //   }
-  // }
-
-  // async function getSchl(id) {
-  //   let response;
-  //   try {
-  //     response = await axios.get(`http://localhost:1337/api/school/${type}/${id}`);
-  //     return response.data[0].name;
-
-  //   }
-  //   catch (error) {
-  //     console.log("Error while fetching school", error)
-  //   }
-
-  // }
   
   async function registerUser(event) {
     
@@ -128,7 +91,7 @@ const FacultyRegister = () => {
         </select>
         <br></br>
         
-        {/* {distid && */}
+        
         <select value={[schoolid,school]} onChange={(e) => { 
           console.log("hello");
           const [sid,sname]=e.target.value.split(",");
@@ -141,7 +104,7 @@ const FacultyRegister = () => {
             <option value={[d._id,d.name]} key={d._id}>{d.name}</option>
           ))}
         </select>
-        {/* } */}
+        
         <br></br>
         <input type="submit" value="Register" />
       </form>

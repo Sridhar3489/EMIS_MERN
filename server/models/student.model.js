@@ -8,6 +8,7 @@ const Stud=new mongoose.Schema({
     school:{type:String,required:true},
     aggr:{type:Number,required:true},
     gender:{type:String,required:true},
+    dist:{type:String,required:true},
     schoolid:{type:mongoose.Schema.Types.ObjectId,ref:'School'},
     distid:{type:mongoose.Schema.Types.ObjectId,ref:'District'}
 },

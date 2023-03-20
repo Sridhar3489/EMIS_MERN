@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import './loginpage.css'
 
 const DistrictRegister = () => {
     const {id,type}=useParams();
@@ -32,23 +33,28 @@ const DistrictRegister = () => {
         }
       }
   return (
-    <div className='page'>hii there
-        <h1>Register District Head </h1>
+    <div className='page'>
+      <div className='login-box'>
+        <h2>Register District Head </h2>
         <form onSubmit={registerDist}>
+          <label>Name</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            type="text" placeholder="Name"></input><br/>
+            type="text"></input><br/>
+            <label>Email</label>
           <input value={email}
-            onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"></input><br/>
+            onChange={(e) => setEmail(e.target.value)} type="email"></input><br/>
+            <label>Password</label>
           <input value={password}
-            onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
-           
-            <input value={dist} placeholder='District' onChange={(e)=>setDist(e.target.value)} type="text"></input>
+            onChange={(e) => setPassword(e.target.value)} type="password" ></input><br/>
+           <label>District</label>
+            <input value={dist} onChange={(e)=>setDist(e.target.value)} type="text"></input>
             <br></br>
            
             <input type="submit" value="Register" />
             </form>
+            </div>
     </div>
   )
 }

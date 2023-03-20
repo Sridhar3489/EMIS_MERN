@@ -76,7 +76,7 @@ const AllStudents = () => {
               <TableCell>{stud.aggr}</TableCell>
               <TableCell>{stud.gender}</TableCell>
               <TableCell>
-                <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editstud/${type}/${stud._id}`}>Edit</Button>
+                <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editstud/${type}/${id}/${stud._id}`}>Edit</Button>
                 <Button variant="contained" color="secondary" onClick={() => deleteStud(stud._id)}>Delete</Button>
               </TableCell>
             </TBody>

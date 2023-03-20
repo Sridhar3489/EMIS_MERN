@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-
+import './loginpage.css'
 
 const FacultyLoginforCourse = () => {
   const type="faculty";
@@ -29,17 +29,20 @@ const FacultyLoginforCourse = () => {
         }
     }
   return (
-    <div className="App">
-      <h1>Login</h1>
+    <div className="page">
+      <div className='login-box'>
+      <h2>Login</h2>
       <form onSubmit={LoginFaculty}>
-       
+       <label>Email</label>
         <input value={email}
-          onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"></input><br/>
+          onChange={(e) => setEmail(e.target.value)} type="email"></input><br/>
+          <label>Password</label>
         <input value={password}
-          onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
+          onChange={(e) => setPassword(e.target.value)} type="password"></input><br/>
           <input type="submit" value="Login" />
           <br></br>
       </form>
+    </div>
     </div>
   )
 }

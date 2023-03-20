@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
+import './styling/dashboardcss.css'
 
 const Dashboard = () => {
   const { id,type } = useParams();

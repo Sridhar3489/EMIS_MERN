@@ -18,15 +18,15 @@ const DistrictDashboard = () => {
       <br></br>
       <label for="faculty">
         &emsp; Faculty &emsp;-
-        <NavLink to={`/facultyregister//${type}/${id}`} className="aaa">Add Faculty</NavLink>
-        <NavLink to={`/allfaculty//${type}/${id}`} className="aaa">All Faculty</NavLink>
+        <NavLink to={`/facultyregister/${type}/${id}`} className="aaa">Add Faculty</NavLink>
+        <NavLink to={`/allfaculty/${type}/${id}`} className="aaa">All Faculty</NavLink>
       </label>
       <br></br>
       <br></br>
       <label for="student">
         &emsp; Student&emsp;-
-        <NavLink className="aaa" to={`/studentregister//${type}/${id}`}>Add Student</NavLink>
-        <NavLink className="aaa" to={`/allStudent//${type}/${id}`}>All Student</NavLink>
+        <NavLink className="aaa" to={`/studentregister/${type}/${id}`}>Add Student</NavLink>
+        <NavLink className="aaa" to={`/allStudent/${type}/${id}`}>All Student</NavLink>
       </label>
     </div>
   )

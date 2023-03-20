@@ -55,11 +55,11 @@ const App = () => {
           <Route path='/schoolregister/:type/:id' element={<SchoolRegister/>}/>
           <Route path='/allschool/:type/:id' element={<AllSchools/>}/>
           <Route path='/editdistrict/:type/:id' element={<EditDistrict/>}/>
-          <Route path='/editschool/:type/:id' element={<EditSchool/>}/>
+          <Route path='/editschool/:type/:id/:editid' element={<EditSchool/>}/>
           <Route path='/allfaculty/:type/:id' element={<AllFaculty/>}/>
-          <Route path='/editfac/:type/:id' element={<EditFaculty/>}/>
+          <Route path='/editfac/:type/:id/:editid' element={<EditFaculty/>}/>
           <Route path='/allstudent/:type/:id' element={<AllStudents/>}/>
-          <Route path='/editstud/:type/:id' element={<EditStudent/>}/>
+          <Route path='/editstud/:type/:id/:editid' element={<EditStudent/>}/>
           <Route path="/schoollogin" element={<SchoolLogin/>}/>
           <Route path='/addvideo/:type/:id' element={<AddVideo/>}/>
           <Route path='/allvideo/:type/:id' element={<AllVideos/>}/>

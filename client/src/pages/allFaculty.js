@@ -73,7 +73,7 @@ const AllFaculty = () => {
               <TableCell>{fac.subject}</TableCell>
               <TableCell>{fac.school}</TableCell>
               <TableCell>
-                <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editfac/${type}/${fac._id}`}>Edit</Button>
+                <Button variant="contained" style={{ marginRight: 10 }} component={Link} to={`/editfac/${type}/${id}/${fac._id}`}>Edit</Button>
                 <Button variant="contained" color="secondary" onClick={() => deleteFac(fac._id)}>Delete</Button>
               </TableCell>
             </TBody>

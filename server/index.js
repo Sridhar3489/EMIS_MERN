@@ -112,7 +112,10 @@ app.post('/api/studentregister/:type/:id',async(req,res)=>{
             study:req.body.study,
             school:req.body.school,
             aggr:req.body.aggr,
-            gender:req.body.gender
+            gender:req.body.gender,
+            dist:req.body.dist,
+            schoolid:req.body.schoolid,
+            distid:req.body.distid,
         })
         res.json({status:'ok'})
     }catch(err){
@@ -140,14 +143,17 @@ app.post('/api/districtregister/:type/:id',async(req,res)=>{
 
 app.get('/api/alldistricts/:type/:id',async(req,res)=>{
     try{
+        
         if(req.params.type=='distr'){
             const districts=await District.find({_id:req.params.id});
+            console.log(districts)
             return res.status(200).json(districts);
         }
         if(req.params.type=='admin'){
             const districts=await District.find({});
             return res.status(200).json(districts);
-        }  
+        } 
+         
     }
     catch(err){
         res.status(404).json({message: err.message});
@@ -174,8 +180,19 @@ app.get('/api/allschools/:type/:id',async(req,res)=>{
 
 app.get('/api/allfaculty/:type/:id',async(req,res)=>{
     try{
-    const school=await Faculty.find({});
-    return res.status(200).json(school);
+        if(req.params.type=='distr'){
+            const school=await Faculty.find({distid:req.params.id});
+            return res.status(200).json(school);
+        }
+        if(req.params.type=='admin'){
+            const school=await Faculty.find({});
+            return res.status(200).json(school);
+        }
+        if(req.params.type=='school'){
+            const school=await Faculty.find({schoolid:req.params.id});
+            return res.status(200).json(school);
+        }
+   
     }
     catch(err){
         res.status(404).json({message: err.message});
@@ -184,8 +201,18 @@ app.get('/api/allfaculty/:type/:id',async(req,res)=>{
 
 app.get('/api/allstud/:type/:id',async(req,res)=>{
     try{
-    const stud=await Stud.find({});
-    return res.status(200).json(stud);
+        if(req.params.type=='distr'){
+            const stud=await Stud.find({distid:req.body.params});
+            return res.status(200).json(stud);
+        }
+        if(req.params.type=='admin'){
+            const stud=await Stud.find({});
+            return res.status(200).json(stud);
+        }
+        if(req.params.type=='school'){
+            const stud=await Stud.find({schoolid:req.body.params});
+            return res.status(200).json(stud);
+        }
     }
     catch(err){
         res.status(404).json({message: err.message});
@@ -365,7 +392,8 @@ app.post('/api/facultyregister/:type/:id',async(req,res)=>{
             password:req.body.password,
             subject:req.body.subject,
             school:req.body.school,
-            dist:req.body.dist
+            dist:req.body.dist,
+            distid:req.body.distid
         })
         res.json({status:'ok'})
     }catch(err){
