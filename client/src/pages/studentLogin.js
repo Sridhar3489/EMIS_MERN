@@ -23,7 +23,8 @@ const StudentLogin = () => {
        
         if(data.user!=''){
           alert('Login Successful');
-          window.location.href=`http://localhost:3000/allvideo/${type}/${data.user[0].id}`;
+          console.log(data.user)
+          window.location.href=`/allvideo/${type}/${data.user[0]._id}`;
         }
         else{
           alert('Please check login credentials')
