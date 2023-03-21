@@ -3,6 +3,8 @@ import {useEffect,useState} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import Dashboard from './Dashboard';
+import { yellow } from '@mui/material/colors';
 const url='http://localhost:1337/api';
 const AllVideos = () => {
   const {id,type}=useParams();
@@ -21,7 +23,11 @@ const AllVideos = () => {
     getVid();
     },[]);
     return (<>
-    <div>All videos</div>
+    <Dashboard/>
+    <div>
+
+      <b>All videos</b><br></br></div>
+      <br></br>
     <div style={{display:'grid'
     ,gridTemplateColumns:'repeat(3,1fr)',
     gridTemplateRows:'1fr 1fr 1fr',
@@ -34,11 +40,13 @@ const AllVideos = () => {
         borderRadius:'5px',
         display:'flex',
         flexDirection:'column',
+        backgroundColor:'orange',
         alignItems:'center',
-        justifyContent:'center',}}>
+        justifyContent:'center'}}>
        <Link to={`http://localhost:3000/displayvideo/${type}/${vid._id}`} > <img width="100%" height="200px" src={`http://localhost:1337/${vid.imageUrl}`}/></Link>
         <div>{vid.title}</div>
         <div>{vid.description}</div>
+        
     </div>);})} 
     </div></>)
 }

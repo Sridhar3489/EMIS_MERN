@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 const EditDistrict = () => {
-    const {id,type}=useParams();
+    const {id,editid,type}=useParams();
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -31,7 +31,7 @@ const EditDistrict = () => {
     async function editDist(){
       const District={name,email,password,dist};
       console.log("before axios");
-      const response=await axios.put(`${url}/editdist/${type}/${id}`,District);
+      const response=await axios.put(`${url}/editdist/${type}/${editid}`,District);
       if(response){
         alert("Updated Successfully");
       window.location.href = `${url2}/alldistrict/${type}/${id}`

@@ -4,6 +4,7 @@ import { Table, TableCell, TableHead, TableBody, TableRow, styled, Button } from
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Dashboard from './Dashboard';
 
 const StyledTable = styled(Table)`
  width: 90%;
@@ -11,15 +12,17 @@ const StyledTable = styled(Table)`
 `
 
 const THead = styled(TableRow)`
-background:#000000;
+background-color:yellow;
 &>th{
   color:#fff;
   font-size:20px;
+  color:black;
 }
 `
 const TBody = styled(TableRow)`
 &>td{
   font-size:20px;
+  background-color:white;
 }
 `
 
@@ -53,6 +56,8 @@ const AllSchools = () => {
   }
 
   return (
+    <div>
+      <Dashboard/>
     <StyledTable>
       <TableHead>
         <THead>
@@ -78,6 +83,7 @@ const AllSchools = () => {
         }
       </TableBody>
     </StyledTable>
+    </div>
   )
 }
 

@@ -49,7 +49,7 @@
     margin-bottom: 20px;
     text-align: center;
     text-transform: uppercase;
-    color: #444;
+    color: black;
   }
 
   .login-box label {
@@ -63,7 +63,8 @@
   .login-box input[type="text"],
   .login-box input[type="email"],
   .login-box input[type="password"],
-  .login-box input[type="number"]{
+  .login-box input[type="number"],
+  .login-box input[type="file"]{
     width: calc(100% - 30px); /* adjust the width */
     padding: 14px;
     font-size: 18px;
@@ -86,7 +87,8 @@
   .login-box input[type="text"]:focus,
   .login-box input[type="email"]:focus,
   .login-box input[type="password"]:focus,
-  .login-box input[type="number"]:focus {
+  .login-box input[type="number"]:focus,
+  .login-box input[type="file"] {
     border-color: #4CAF50;
     outline: none; 
   }
@@ -132,15 +134,17 @@
 
   .login-box1 input[type="text"]:focus,
   .login-box1 input[type="email"]:focus,
-  .login-box1 input[type="password"]:focus {
+  .login-box1 input[type="password"]:focus,
+  .login-box1 input[type="number"]:focus  {
     border-color: #4CAF50;
     outline: none; 
   }
 
   .login-box1 input[type="text"],
   .login-box1 input[type="email"],
-  .login-box1 input[type="password"] {
-    width: calc(100% - 30px); /* adjust the width */
+  .login-box1 input[type="password"],
+  .login-box1 input[type="number"] {
+    width: calc(100% - 30px); 
     padding: 15px;
     font-size: 18px;
     border-radius: 5px;
@@ -151,9 +155,9 @@
 
   .login-box1 label {
     display: block;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     color: #555;
   }
 
@@ -164,7 +168,7 @@
     margin-bottom: 20px;
     text-align: center;
     text-transform: uppercase;
-    color: #444;
+    color: black;
   }
 
   .login-box1 {
@@ -176,7 +180,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: absolute;
     top:50%;
-    width:70%;
+    width:100%;
     left: 50%;
     transform: translate(-50%, -50%);
   }

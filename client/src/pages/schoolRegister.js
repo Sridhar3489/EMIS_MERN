@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import axios from 'axios';
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import './loginpage.css'
 
 const SchoolRegister = () => {
     const {type,id}=useParams();
@@ -51,7 +52,7 @@ const SchoolRegister = () => {
             window.location.href=`/dashboard/${type}/${id}`
           }
           else{
-            window.location.href=`/districtdashboard/${type}/${id}`
+            window.location.href=`/dashboard/${type}/${id}`
           }
           
         }
@@ -61,17 +62,21 @@ const SchoolRegister = () => {
       
       }
   return (
-    <div>hii there
-        <h1>Register School Head </h1>
+    <div className='page'>
+      <div className='login-box'>
+        <h2>Register School Head </h2>
         <form onSubmit={registerScl}>
+          <label>Name</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            type="text" placeholder="Name"></input><br/>
+            type="text" ></input><br/>
+            <label>Email</label>
           <input value={email}
-            onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"></input><br/>
+            onChange={(e) => setEmail(e.target.value)} type="email" ></input><br/>
+            <label>Password</label>
           <input value={password}
-            onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
+            onChange={(e) => setPassword(e.target.value)} type="password" ></input><br/>
            
            <select value={[distid,distr]} onChange={
             (e)=>{
@@ -88,6 +93,7 @@ const SchoolRegister = () => {
            
             <input type="submit" value="Register" />
             </form>
+            </div>
     </div>
   )
 }

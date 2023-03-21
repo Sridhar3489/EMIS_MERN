@@ -22,7 +22,7 @@ const SchoolLogin = () => {
         
         if(data.user!=''){
           alert('Login Successful');
-          window.location.href=`/schooldashboard/${type}/${data.user[0]._id}`;
+          window.location.href=`/dashboard/${type}/${data.user[0]._id}`;
         }
         else{
           alert('Please check login credentials')

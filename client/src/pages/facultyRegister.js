@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useEffect } from 'react'
+import './loginpage.css'
 
 const FacultyRegister = () => {
   const { id, type } = useParams()
@@ -85,34 +86,33 @@ const FacultyRegister = () => {
     const data = await response.json()
     if (data.status === 'ok') {
       alert("Faculty Registered Succesfully")
-      if(type=='admin'){
+      
         window.location.href = `/dashboard/${type}/${id}`
-      }
-      if(type=='distr'){
-        window.location.href = `/districtdashboard/${type}/${id}`
-      }
-      if(type=='school'){
-        window.location.href = `/schooldashboard/${type}/${id}`
-      }
+      
     }
     else {
       alert("Not registered !!! Kindly check details once again")
     }
   }
   return (
-    <div>hii there
-      <h1>Faculty Register</h1>
+    <div className='page'>
+      <div className='login-box1'>
+      <h2>Faculty Register</h2>
+      
       <form onSubmit={registerUser}>
+        <label>Name</label>
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          type="text" placeholder="Name"></input><br />
+          type="text"></input><br />
+          <label>Email</label>
         <input value={email}
-          onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"></input><br />
+          onChange={(e) => setEmail(e.target.value)} type="email"></input><br />
+          <label>Password</label>
         <input value={password}
-          onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br />
-
-        <input value={subject} placeholder='Subject' onChange={(e) => setSubject(e.target.value)} type="text"></input>
+          onChange={(e) => setPassword(e.target.value)} type="password" ></input><br />
+        <label>Subject</label>
+        <input value={subject}  onChange={(e) => setSubject(e.target.value)} type="text"></input>
         <br></br>
         <select value={[distid,dist]} onChange={(e) => {const [did,dname]=e.target.value.split(",");setDistId(did);setDist(dname);}}>
           <option>------select district------</option>
@@ -139,6 +139,7 @@ const FacultyRegister = () => {
         <br></br>
         <input type="submit" value="Register" />
       </form>
+      </div>
     </div>
   )
 }

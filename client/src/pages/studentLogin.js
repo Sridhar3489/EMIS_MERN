@@ -2,8 +2,10 @@ import React from 'react'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import './loginpage.css'
+import Dashboard from './Dashboard'
 
 const StudentLogin = () => {
+  const type='student'
     const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
     const LoginStudent = async (e) => {
@@ -18,17 +20,18 @@ const StudentLogin = () => {
         });
         const data = await response.json();
         console.log(data);
-         if  (data.user) {
-            //save the auth token and redirect
-            alert('Login Successful')
-          window.location.href='/courseHomePage'
+       
+        if(data.user!=''){
+          alert('Login Successful');
+          window.location.href=`http://localhost:3000/allvideo/${type}/${data.user[0].id}`;
         }
         else{
-            alert('Login Fail')
+          alert('Please check login credentials')
         }
     }
   return (
     <div className="page">
+      
       <div className='login-box'>
       <h2>Student Login</h2>
       <form onSubmit={LoginStudent}>

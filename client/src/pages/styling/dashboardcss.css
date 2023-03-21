@@ -1,4 +1,6 @@
+
 .page::before {
+  font-family: "Segoe UI",Arial,sans-serif;
     content: "";
     position: absolute;
     top: 0;
@@ -17,49 +19,82 @@
   }
   
   .page::after {
-    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-     /* set the opacity as needed */
     z-index: -1;
   }
 
-.text-container {
-    box-shadow: 4px 4px 5px rgba(0,0,0,0.5);
-    border-radius: 5px;
-    border:#ccc;
-    padding: 10px;
-    backdrop-filter: blur(5px);
-    font-weight: bold;
-    font-size: large;
+  .navbar {
+    background-color: #333;
+    overflow: hidden;
   }
-
-  .line {
-    
-    
-    padding: 10px 0;
-    
-  }
-
-  .line p {
+  
+  .navbar ul {
     margin: 0;
-    
+    padding: 0;
+    list-style: none;
+    margin-bottom:15px;
   }
-
-  .aaa  {
+  
+  .navbar li {
+    float: left;
+  }
+  
+  .navbar a {
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
     text-decoration: none;
-    color: #0077cc;
+    transition: 0.3s;
     
   }
-
-  .aaa :hover {
-    font-size:30px
+  
+  .dropdown{
+    transition: 0.3s;
   }
 
-  .line span {
-    margin: 0 5px;
-    color: #ccc;
+ .active{
+  padding:10px;
+  font-size: 18px;
+ }
+
+  .navbar a:hover {
+    background-color: green;
   }
+  
+  .dropdown:hover .dropdown-menu {
+    transition: 0.3s;
+    display:block;
+  }
+
+  .dropdown-menu {
+    display:none;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    z-index: 1;
+    font-size: 18px;
+  }
+  
+  .dropdown-menu li {
+    display:block;
+    transition: 0.3s;
+  }
+  
+  .dropdown-menu li:hover {
+    background-color: green;
+  }
+
+
+.logout{
+  float:right;
+  font-size: 18;
+}
+
+.navbar .logout:hover{
+  background-color: rgb(233, 12, 12);
+}

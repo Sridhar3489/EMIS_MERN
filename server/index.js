@@ -84,7 +84,7 @@ app.post('/api/distlogin',async(req,res)=>{
  })
 
 app.post('/api/studentlogin',async(req,res)=>{
-    const user=await Stud.findOne({
+    const user=await Stud.find({
      email:req.body.email,
      password:req.body.password
     }
@@ -94,7 +94,7 @@ app.post('/api/studentlogin',async(req,res)=>{
          name:user.name,
          email:user.email
      },'secret13')
-     return res.json({status:'ok',user:true})
+     return res.json({status:'ok',user})
     }
     else{
      return res.json({status:'error',user:false})

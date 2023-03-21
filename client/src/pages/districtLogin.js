@@ -23,7 +23,7 @@ const DistrictLogin = () => {
          if  (data.user!='') {
             //save the auth token and redirect
             alert('Login Successful')
-          window.location.href=`/districtdashboard/${type}/${data.user[0]._id}`
+          window.location.href=`/dashboard/${type}/${data.user[0]._id}`
         }
         else{
             alert('Login Fail')
@@ -32,7 +32,7 @@ const DistrictLogin = () => {
   return (
     <div className="page">
       <div className='login-box'>
-      <h1>Login</h1>
+      <h2>District Login</h2>
       <form onSubmit={LoginDistrict}>
        <label>Email</label>
         <input value={email}

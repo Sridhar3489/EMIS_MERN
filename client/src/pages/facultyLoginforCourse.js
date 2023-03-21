@@ -19,19 +19,18 @@ const FacultyLoginforCourse = () => {
             body: JSON.stringify({ email, password})
         });
         const data = await response.json();
-         if  (data.user) {
-            //save the auth token and redirect
-            alert('Login Successful')
-          window.location.href=`/facultyhomepage/${type}/${data.user[0]._id}`
+        if(data.user!=''){
+          alert('Login Successful');
+          window.location.href=`/facultyhomepage/${type}/${data.user[0]._id}`;
         }
         else{
-            alert('Login Fail')
+          alert('Please check login credentials')
         }
     }
   return (
     <div className="page">
       <div className='login-box'>
-      <h2>Login</h2>
+      <h2>Faculty Login</h2>
       <form onSubmit={LoginFaculty}>
        <label>Email</label>
         <input value={email}

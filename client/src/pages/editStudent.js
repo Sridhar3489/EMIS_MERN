@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate,useParams } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import axios from 'axios';
-
+import './loginpage.css'
 
 const EditStudent = () => {
     const {id,editid,type}=useParams();
@@ -88,8 +88,9 @@ const EditStudent = () => {
       //window.location.href=`//${id}`
     }
   return (
-    <div>hii there
-        <h1>Edit Student </h1>
+    <div className='page'>
+      <div className='login-box1'>
+        <h2>Edit Student </h2>
         <form onSubmit={editStud}>
           <input
             value={name}
@@ -100,10 +101,8 @@ const EditStudent = () => {
           <input value={password}
             onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>  
             <input value={study} placeholder='Study' onChange={(e)=>setStudy(e.target.value)} type="Number"></input>
-            <br></br>
-            
             <input value={aggr} placeholder='Aggregate' onChange={(e)=>setAggr(e.target.value)} type="Number"></input>
-            <br></br>
+            
             <input type="radio" name="gender" value="Male" onChange={(e)=>setGender(e.target.value)}></input>
             <label for="male">Male</label>
             <input type="radio" name="gender" value="Female" onChange={(e)=>setGender(e.target.value)}></input>
@@ -115,9 +114,6 @@ const EditStudent = () => {
             <option value={[d._id,d.dist]} key={d._id}>{d.dist}</option>
           ))}
         </select>
-        <br></br>
-        
-        
         <select value={[schoolid,school]} onChange={(e) => { 
           console.log("hello");
           const [sid,sname]=e.target.value.split(",");
@@ -130,10 +126,9 @@ const EditStudent = () => {
             <option value={[d._id,d.name]} key={d._id}>{d.name}</option>
           ))}
         </select>
-        
-        <br></br>
             <input type="submit" value="Submit" />
             </form>
+            </div>
     </div>
   )
 }

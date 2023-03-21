@@ -3,6 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { styled,FormControl,Input,Button, InputLabel } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import './loginpage.css'
 const FormData=require('form-data');
 const AddVideo = () => {
   const {id,type}=useParams()
@@ -37,18 +38,21 @@ const AddVideo = () => {
     }
   return (
     
-    <div className="App">
-        <h1>Add Video</h1>
+    <div className="page">
+      <div className='login-box'>
+      <h1>Add Video</h1>
        
-        <form onSubmit={addVideo} >
-         
-        <input value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder="Title"/><br></br>
-        <input value={description} onChange={(e) => setDescription(e.target.value)} type="text" placeholder="Description"/><br></br>
-         Add Image <input  onChange={(e) => setImageUrl(e.target.files[0])} type="file" name="imageUrl"/><br></br>
-         Add Video<input onChange={(e) => setVideoUrl(e.target.files[0])} type="file" name="videoUrl"/><br></br>
-            
-            <Button type="submit" variant="contained" color="primary">Upload</Button> 
-        </form>
+       <form onSubmit={addVideo} >
+        <label>Title</label>
+       <input value={title} onChange={(e) => setTitle(e.target.value)} type="text"/><br></br>
+       <label>Description</label>
+       <input value={description} onChange={(e) => setDescription(e.target.value)} type="text" /><br></br>
+       <label>Add Image</label> <input  onChange={(e) => setImageUrl(e.target.files[0])} type="file" name="imageUrl"/><br></br>
+       <label>Add Video</label><input onChange={(e) => setVideoUrl(e.target.files[0])} type="file" name="videoUrl"/><br></br>
+        <Button type="submit" variant="contained" color="primary">Upload</Button> 
+       </form>
+       
+      </div>
         
       </div>
   );

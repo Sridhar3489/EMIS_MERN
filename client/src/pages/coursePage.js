@@ -1,12 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import './coursecss.css'
 
 const CoursePage = () => {
   return (
     <div className='page'>
-        Login as
-        <NavLink className="aaa" to="/studentlogin">Student</NavLink>
-        <NavLink className="aaa" to="/facultyloginforcourse">Faculty</NavLink>
+        <p>Login as</p>
+        <NavLink className="aaa1" to="/studentlogin">Student</NavLink>
+        <NavLink className="aaa2" to="/facultyloginforcourse">Faculty</NavLink>
     </div>
   )
 }

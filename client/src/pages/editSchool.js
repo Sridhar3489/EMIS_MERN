@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate,useParams } from 'react-router-dom'
 import { useState,useEffect } from 'react'
 import axios from 'axios';
-
+import './loginpage.css'
 
 const EditSchool = () => {
     const {id,editid,type}=useParams();
@@ -54,8 +54,9 @@ const EditSchool = () => {
       //window.location.href=`/alldistrict/${id}`
     }
   return (
-    <div>hii there
-        <h1>Edit School Head </h1>
+    <div className='page'>
+      <div className='login-box'>
+        <h2>Edit School Head </h2>
         <form onSubmit={editSchl}>
           <input
             value={name}
@@ -78,6 +79,7 @@ const EditSchool = () => {
       </select>
             <input type="submit" value="Submit" />
             </form>
+            </div>
     </div>
   )
 }
