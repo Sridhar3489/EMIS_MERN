@@ -12,14 +12,16 @@ const EditStudent = () => {
     const [study,setStudy]=useState('')
     const [school,setSchool]=useState('')
     const [aggr,setAggr]=useState('')
-    const [gender,setGender]=useState('False')
+    const [gender,setGender]=useState('')
     const [alldist,setAllDist]=useState([]);
     const [allschl,setAllSchl]=useState([]);
     const [dist,setDist]=useState('')
     const [distid,setDistId]=useState('')
     const [schoolid,setSchoolID]=useState('')
     const navigat=useNavigate();
+    var response1;
     const url='http://localhost:1337/api';
+    const url2='http://localhost:3000'
     useEffect(()=>{
     async function get(){
       try{
@@ -42,10 +44,21 @@ const EditStudent = () => {
     get();
     async function getDists() {
       try {
-
-        let response = await axios.get(`http://localhost:1337/api/alldistricts/${type}/${id}`);
+        if(type=='admin' || type=='distr'){
+          let response = await axios.get(`http://localhost:1337/api/alldistricts/${type}/${id}`);
         console.log(response.data)
         setAllDist(response.data)
+        }
+        else{
+          let x='admin'
+          response1=await axios.get(`http://localhost:1337/api/school/${type}/${id}`)
+          console.log(response1.data)
+          const newid=response1.data[0].distid;
+          let response2=await axios.get(`http://localhost:1337/api/district/${x}/${newid}`)
+          setAllDist(response2.data)
+          setAllSchl(response1.data)
+          console.log(response2.data)
+        }
       }
       catch (error) {
         console.log("Error while fetching all districts", error)
@@ -55,10 +68,12 @@ const EditStudent = () => {
     },[]);
     useEffect(()=>{
 
-      if(distid!=''){
-        const x="distr";
-        fetch(`http://localhost:1337/api/allschools/${x}/${distid}`).then(res=>res.json()).then(data=>setAllSchl(data)).catch(err=>console.error(err));
-        console.log(allschl);
+      if(type=='admin'|| type=='distr'){
+        if(distid!=''){
+          const x="distr";
+          fetch(`http://localhost:1337/api/allschools/${x}/${distid}`).then(res=>res.json()).then(data=>setAllSchl(data)).catch(err=>console.error(err));
+          //console.log(allschl);
+        }
       }
     },[distid])
 
@@ -68,6 +83,7 @@ const EditStudent = () => {
       const response=await axios.put(`${url}/editstud/${type}/${editid}`,Student);
       if(response){
         alert("Updated Succesfully")
+        window.location.href = `${url2}/allStudent/${type}/${id}`
       }
       //window.location.href=`//${id}`
     }

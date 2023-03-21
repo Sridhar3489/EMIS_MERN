@@ -16,13 +16,27 @@ const FacultyRegister = () => {
   const [dist,setDist]=useState('')
   const [distid,setDistId]=useState('')
   const [schoolid,setSchoolID]=useState('')
+  var response1;
+  
   useEffect(() => {
     async function getDists() {
       try {
-
-        let response = await axios.get(`http://localhost:1337/api/alldistricts/${type}/${id}`);
-
-        setAllDist(response.data)
+        if(type=='admin' || type=='distr'){
+          let response = await axios.get(`http://localhost:1337/api/alldistricts/${type}/${id}`);
+          setAllDist(response.data)
+        }
+        else{
+          let x='admin'
+          response1=await axios.get(`http://localhost:1337/api/school/${type}/${id}`)
+          console.log(response1.data)
+          const newid=response1.data[0].distid;
+          let response2=await axios.get(`http://localhost:1337/api/district/${x}/${newid}`)
+          setAllDist(response2.data)
+          setAllSchl(response1.data)
+          console.log(response2.data)
+        }
+        
+        
       }
       catch (error) {
         console.log("Error while fetching all districts", error)
@@ -30,13 +44,22 @@ const FacultyRegister = () => {
     }
     getDists();
   }, []);
+  
   useEffect(()=>{
-    if(distid!=''){
-      const x="distr";
-      fetch(`http://localhost:1337/api/allschools/${x}/${distid}`).then(res=>res.json()).then(data=>setAllSchl(data)).catch(err=>console.error(err));
-      //console.log(allschl);
+    if(type=='admin'|| type=='distr'){
+      if(distid!=''){
+        const x="distr";
+        fetch(`http://localhost:1337/api/allschools/${x}/${distid}`).then(res=>res.json()).then(data=>setAllSchl(data)).catch(err=>console.error(err));
+        //console.log(allschl);
+      }
+      
     }
-  },[distid])
+    /*else{
+      console.log('hiii')
+      setAllSchl(response1.data)
+    }*/
+    },[distid])
+    
   
   async function registerUser(event) {
     
@@ -62,7 +85,15 @@ const FacultyRegister = () => {
     const data = await response.json()
     if (data.status === 'ok') {
       alert("Faculty Registered Succesfully")
-      window.location.href = `/dashboard/${type}/${id}`
+      if(type=='admin'){
+        window.location.href = `/dashboard/${type}/${id}`
+      }
+      if(type=='distr'){
+        window.location.href = `/districtdashboard/${type}/${id}`
+      }
+      if(type=='school'){
+        window.location.href = `/schooldashboard/${type}/${id}`
+      }
     }
     else {
       alert("Not registered !!! Kindly check details once again")
@@ -84,7 +115,7 @@ const FacultyRegister = () => {
         <input value={subject} placeholder='Subject' onChange={(e) => setSubject(e.target.value)} type="text"></input>
         <br></br>
         <select value={[distid,dist]} onChange={(e) => {const [did,dname]=e.target.value.split(",");setDistId(did);setDist(dname);}}>
-          <option>select district</option>
+          <option>------select district------</option>
           {alldist.map((d) => (
             <option value={[d._id,d.dist]} key={d._id}>{d.dist}</option>
           ))}
@@ -99,7 +130,7 @@ const FacultyRegister = () => {
           setSchool(sname); 
           console.log(schoolid,school);
         }} >
-           <option>select school</option>
+           <option>-----select school-----</option>
           {allschl.map((d) => (
             <option value={[d._id,d.name]} key={d._id}>{d.name}</option>
           ))}

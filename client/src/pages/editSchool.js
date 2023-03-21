@@ -14,6 +14,7 @@ const EditSchool = () => {
     const [distid,setDistId]=useState('')
     const navigat=useNavigate();
     const url='http://localhost:1337/api';
+    const url2='http://localhost:3000'
     useEffect(()=>{
     async function get(){
       try{
@@ -48,6 +49,7 @@ const EditSchool = () => {
       const response=await axios.put(`${url}/editschl/${type}/${editid}`,School);
       if(response){
         alert("Updated Successfully");
+        window.location.href = `${url2}/allschool/${type}/${id}`
       }
       //window.location.href=`/alldistrict/${id}`
     }

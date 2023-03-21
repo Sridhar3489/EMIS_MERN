@@ -16,8 +16,10 @@ const EditFaculty = () => {
   const [dist,setDist]=useState('')
   const [distid,setDistId]=useState('')
   const [schoolid,setSchoolID]=useState('')
+  var response1;
     const navigat=useNavigate();
     const url='http://localhost:1337/api';
+    const url2='http://localhost:3000'
     useEffect(()=>{
     async function get(){
       try{
@@ -39,9 +41,21 @@ const EditFaculty = () => {
     async function getDists() {
       try {
 
-        let response = await axios.get(`http://localhost:1337/api/alldistricts/${type}/${id}`);
+        if(type=='admin' || type=='distr'){
+          let response = await axios.get(`http://localhost:1337/api/alldistricts/${type}/${id}`);
 
         setAllDist(response.data)
+        }
+        else{
+          let x='admin'
+          response1=await axios.get(`http://localhost:1337/api/school/${type}/${id}`)
+          console.log(response1.data)
+          const newid=response1.data[0].distid;
+          let response2=await axios.get(`http://localhost:1337/api/district/${x}/${newid}`)
+          setAllDist(response2.data)
+          setAllSchl(response1.data)
+          console.log(response2.data)
+        }
       }
       catch (error) {
         console.log("Error while fetching all districts", error)
@@ -51,10 +65,12 @@ const EditFaculty = () => {
     },[]);
     useEffect(()=>{
 
-      if(distid!=''){
-        const x="distr";
-        fetch(`http://localhost:1337/api/allschools/${x}/${distid}`).then(res=>res.json()).then(data=>setAllSchl(data)).catch(err=>console.error(err));
-        //console.log(allschl);
+      if(type=='admin'|| type=='distr'){
+        if(distid!=''){
+          const x="distr";
+          fetch(`http://localhost:1337/api/allschools/${x}/${distid}`).then(res=>res.json()).then(data=>setAllSchl(data)).catch(err=>console.error(err));
+          //console.log(allschl);
+        }
       }
     },[distid])
     async function editFac(){
@@ -63,6 +79,7 @@ const EditFaculty = () => {
       const response=await axios.put(`${url}/editfac/${type}/${editid}`,Faculty);
       if(response){
         alert("Updated Successfully");
+        window.location.href = `${url2}/allfaculty/${type}/${id}`
       }
       //window.location.href=`/alldistrict/${id}`
     }

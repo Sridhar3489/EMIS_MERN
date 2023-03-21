@@ -12,6 +12,7 @@ const EditDistrict = () => {
     const [dist,setDist]=useState('')
     const navigat=useNavigate();
     const url='http://localhost:1337/api';
+    const url2='http://localhost:3000'
     useEffect(()=>{
     async function get(){
       try{
@@ -31,7 +32,10 @@ const EditDistrict = () => {
       const District={name,email,password,dist};
       console.log("before axios");
       const response=await axios.put(`${url}/editdist/${type}/${id}`,District);
-      alert("Updated Successfully");
+      if(response){
+        alert("Updated Successfully");
+      window.location.href = `${url2}/alldistrict/${type}/${id}`
+      }
       //window.location.href=`/alldistrict/${id}`
     }
   return (

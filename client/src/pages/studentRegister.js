@@ -19,13 +19,25 @@ const StudentRegister = () => {
     const [distid,setDistId]=useState('')
     const [alldist,setAllDist]=useState([]);
     const [allschl,setAllSchl]=useState([]);
+    var response1;
     useEffect(() => {
       async function getDists() {
         try {
-  
-          let response = await axios.get(`http://localhost:1337/api/alldistricts/${type}/${id}`);
+          if(type=='admin' || type=='distr'){
+            let response = await axios.get(`http://localhost:1337/api/alldistricts/${type}/${id}`);
   
           setAllDist(response.data)
+          }
+          else{
+            let x='admin'
+            response1=await axios.get(`http://localhost:1337/api/school/${type}/${id}`)
+            console.log(response1.data)
+            const newid=response1.data[0].distid;
+            let response2=await axios.get(`http://localhost:1337/api/district/${x}/${newid}`)
+            setAllDist(response2.data)
+            setAllSchl(response1.data)
+            console.log(response2.data)
+          }
         }
         catch (error) {
           console.log("Error while fetching all districts", error)
@@ -34,10 +46,12 @@ const StudentRegister = () => {
       getDists();
     }, []);
     useEffect(()=>{
-      if(distid!=''){
-        const x="distr";
-        fetch(`http://localhost:1337/api/allschools/${x}/${distid}`).then(res=>res.json()).then(data=>setAllSchl(data)).catch(err=>console.error(err));
-        //console.log(allschl);
+      if(type=='admin'|| type=='distr'){
+        if(distid!=''){
+          const x="distr";
+          fetch(`http://localhost:1337/api/allschools/${x}/${distid}`).then(res=>res.json()).then(data=>setAllSchl(data)).catch(err=>console.error(err));
+          //console.log(allschl);
+        }
       }
     },[distid])
     async function registerUser(event){
@@ -55,13 +69,23 @@ const StudentRegister = () => {
             school,
             aggr,
             gender,
-            dist
+            dist,
+            schoolid,
+            distid
           }),
         })
         const data = await response.json()
         if(data.status==='ok'){
           alert("Student registered succesfully")
-          window.location.href=`/dashboard/${type}/${id}`
+          if(type=='admin'){
+            window.location.href = `/dashboard/${type}/${id}`
+          }
+          if(type=='distr'){
+            window.location.href = `/districtdashboard/${type}/${id}`
+          }
+          if(type=='school'){
+            window.location.href = `/schooldashboard/${type}/${id}`
+          }
         }
       }
   return (

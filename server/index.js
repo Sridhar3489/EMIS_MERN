@@ -202,7 +202,7 @@ app.get('/api/allfaculty/:type/:id',async(req,res)=>{
 app.get('/api/allstud/:type/:id',async(req,res)=>{
     try{
         if(req.params.type=='distr'){
-            const stud=await Stud.find({distid:req.body.params});
+            const stud=await Stud.find({distid:req.params.id});
             return res.status(200).json(stud);
         }
         if(req.params.type=='admin'){
@@ -210,7 +210,7 @@ app.get('/api/allstud/:type/:id',async(req,res)=>{
             return res.status(200).json(stud);
         }
         if(req.params.type=='school'){
-            const stud=await Stud.find({schoolid:req.body.params});
+            const stud=await Stud.find({schoolid:req.params.id});
             return res.status(200).json(stud);
         }
     }
@@ -393,7 +393,8 @@ app.post('/api/facultyregister/:type/:id',async(req,res)=>{
             subject:req.body.subject,
             school:req.body.school,
             dist:req.body.dist,
-            distid:req.body.distid
+            distid:req.body.distid,
+            schoolid:req.body.schoolid
         })
         res.json({status:'ok'})
     }catch(err){
@@ -423,7 +424,7 @@ app.post('/api/schoollogin',async(req,res)=>{
     }
     )
     if(user){
-     return res.json({status:'ok'})
+     return res.json({status:'ok',user})
     }
     else{
      return res.json({status:'error',user:false})

@@ -28,6 +28,7 @@ import AllVideos from './pages/allVideos';
 import DisplayVideo from './pages/displayVideo';
 import SchoolLogin from './pages/schoolLogin';
 import DistrictDashboard from './pages/districtDashboard';
+import SchoolDashboard from './pages/schoolDashboard';
 
 const App = () => {
   return (
@@ -65,6 +66,7 @@ const App = () => {
           <Route path='/allvideo/:type/:id' element={<AllVideos/>}/>
           <Route path='/displayvideo/:type/:id' element={<DisplayVideo/>}/>
           <Route path='/districtdashboard/:type/:id' element={<DistrictDashboard/>}/>
+          <Route path='/schooldashboard/:type/:id' element={<SchoolDashboard/>}/>
         </Routes>
       </BrowserRouter>
     </>

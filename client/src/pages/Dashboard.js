@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import './styling/dashboardcss.css'
+import './logout.js'
 
 const Dashboard = () => {
   const { id,type } = useParams();
@@ -9,7 +10,7 @@ const Dashboard = () => {
     <div className='page'>
       <br>
       </br>
-
+    
       <label for="dis">
         &emsp; District &emsp;-
         <NavLink to={`/districtregister/${type}/${id}`} className="aaa">Add District Head</NavLink>

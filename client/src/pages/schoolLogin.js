@@ -20,13 +20,12 @@ const SchoolLogin = () => {
         });
         const data = await response.json();
         
-         if  (data.user) {
-            //save the auth token and redirect
-            alert('Login Successful')
-
+        if(data.user!=''){
+          alert('Login Successful');
+          window.location.href=`/schooldashboard/${type}/${data.user[0]._id}`;
         }
         else{
-            alert('Login Fail')
+          alert('Please check login credentials')
         }
     }
   return (
