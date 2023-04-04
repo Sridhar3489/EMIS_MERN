@@ -6,12 +6,20 @@ import axios from 'axios';
 const DisplayVideo = () => {
 
     const [videoUrl, setVideoUrl] = useState('')
+<<<<<<< HEAD
     const {id}=useParams(); 
+=======
+    const {id,type}=useParams(); 
+>>>>>>> e996da5fdce5968ed46aeb7a4c13482d3787d8de
     const url='http://localhost:1337/api';
       useEffect(()=>{
       async function get(){
         try{
+<<<<<<< HEAD
           let response=await axios.get(`${url}/getvideo/${id}`);
+=======
+          let response=await axios.get(`${url}/getvideo/${type}/${id}`);
+>>>>>>> e996da5fdce5968ed46aeb7a4c13482d3787d8de
           setVideoUrl(response.data[0].videoUrl);
         }
         catch(error){

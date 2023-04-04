@@ -1,11 +1,13 @@
 import React from 'react'
+import axios from 'axios';
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import './loginpage.css'
 
 const Login = () => {
-    
+    const type="admin";
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role,setRole]=useState('')
   
  async function LoginUser(event){
     event.preventDefault();
@@ -21,9 +23,9 @@ const Login = () => {
       }),
     })
     const data = await response.json()
-    if(data.user){
-      alert('Login Successful')
-      window.location.href='/dashboard'
+    if(data.user!=''){
+      alert('Login Successful');
+      window.location.href=`/dashboard/${type}/${data.user[0]._id}`;
     }
     else{
       alert('Please check login credentials')
@@ -63,16 +65,19 @@ const Login = () => {
 
 
   return (
-    <div className="App">
+    <div className="page">
+      <div className='login-box'>
       <h1>Login</h1>
       <form onSubmit={LoginUser}>
-       
+       <label>Login</label>
         <input value={email}
-          onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"></input><br/>
+          onChange={(e) => setEmail(e.target.value)} type="email" ></input><br/>
+          <label>Password</label>
         <input value={password}
-          onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
+          onChange={(e) => setPassword(e.target.value)} type="password"></input><br/>
           <input type="submit" value="Login" />
       </form>
+      </div>
     </div>
   )
 }
