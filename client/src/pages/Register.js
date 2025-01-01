@@ -1,10 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
 
+
 const Register = () => {
+  
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [role,setRole]=useState('')
     
     async function registerUser(event){
       event.preventDefault();
@@ -17,9 +20,14 @@ const Register = () => {
           name,
           email,
           password,
+          role,
         }),
       })
       const data = await response.json()
+      if(data.status==='ok'){
+        alert("User registered, please Login to continue")
+        window.location.href='/login'
+      }
     }
   
     return (
@@ -34,6 +42,10 @@ const Register = () => {
             onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Email"></input><br/>
           <input value={password}
             onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"></input><br/>
+            <input
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            type="text" placeholder="Role"></input><br/>
             <input type="submit" value="Register" />
         </form>
       </div>
